@@ -2,16 +2,17 @@ image:
   file:  .gitpod.Dockerfile
 
 tasks:
-  - name: start
-    before: |
-      pyenv virtualenv flvenv
-      source activate flvenv
+  # - name: start
+- before: >
+    pyenv virtualenv flvenv
+    source activate flvenv
 
-      export FLASK_APP=app
-      export FLASK_ENV=development
+    export FLASK_APP=app
+    export FLASK_ENV=development
       
-      pip install Flask
-    # init:  |
+    pip install flask
+- init:  |
+    echo "проверка init"
     #   source activate flvenv
     #   pip install Flask  
 
