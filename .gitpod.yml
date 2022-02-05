@@ -10,8 +10,8 @@ tasks:
       export FLASK_APP=app
       export FLASK_ENV=development
       
-      pip install Flask
-  - init: echo 'init script'   
+      # pip install Flask
+  - init: pip install Flask  
 
 
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
