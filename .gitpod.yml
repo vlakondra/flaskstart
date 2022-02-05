@@ -7,7 +7,7 @@ tasks:
     pyenv virtualenv flvenv
     source activate flvenv
 
-    export FLASK_APP=app
+    export FLASK_APP=learnflask
     export FLASK_ENV=development
       
     pip install flask
@@ -20,9 +20,9 @@ tasks:
 # List the start up tasks.   Learn more https://www.gitpod.io/docs/config-start-tasks/
 # tasks:
 #   - init: echo 'init script' # runs during prebuild
-#     command: echo 'start script'
+  command: flask run
 
 # # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
-  - port: 3000
+  - port: 5000
     onOpen: open-preview
