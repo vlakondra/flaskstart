@@ -3,7 +3,7 @@ image:
 
 tasks:
   # - name: start
-- before: >
+- before: |
     pyenv virtualenv flvenv
     source activate flvenv
 
@@ -11,7 +11,7 @@ tasks:
     export FLASK_ENV=development
       
     pip install flask
-- init:  |
+  init:  |
     echo "проверка init"
     #   source activate flvenv
     #   pip install Flask  
