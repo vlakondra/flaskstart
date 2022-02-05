@@ -5,13 +5,14 @@ tasks:
   - name: start
     before: |
       pyenv virtualenv flvenv
-      source activate flvenv
 
       export FLASK_APP=app
       export FLASK_ENV=development
       
       # pip install Flask
-  - init: pip install Flask  
+    init:  |
+      source activate flvenv
+      pip install Flask  
 
 
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
