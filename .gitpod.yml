@@ -7,10 +7,10 @@ tasks:
       pyenv virtualenv flvenv
       source activate flvenv
 
-      export FLASK_APP = app
-      export FLASK_ENV = development
+      export FLASK_APP=app
+      export FLASK_ENV=development
       
-      pip install flask
+      pip install Flask
   - init: echo 'init script'   
 
 
