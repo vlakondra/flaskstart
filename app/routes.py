@@ -1,23 +1,45 @@
 from app import app
+from datetime import datetime
+from flask import render_template
 
 
 @app.route('/')
 @app.route('/index')
 def index():
-    user = {'username': 'Miguel'}
-    return '''
-<html>
-    <head>
-        <title>Home Page - Microblog</title>
-    </head>
-    <body>
-        <h1>Hello, ''' + user['username'] + '''!</h1>
-    </body>
-</html>'''
+    return render_template(
+        'index.html',
+        title='Home Page',
+        year=datetime.now().year,
+    )
 
 
-@app.route('/test')
-def tst():
-    a = 10
+# def index():
+#     user = {'username': 'Miguel'}
+#     return '''
+# <html>
+#     <head>
+#         <title>Home Page - Microblog</title>
+#     </head>
+#     <body>
+#         <h1>Hello, ''' + user['username'] + '''!</h1>
+#     </body>
+# </html>'''
 
-    return str(5/a)+" Привет, World!!!"
+
+@app.route('/about')
+def about():
+  return render_template(  
+        'about.html',
+        title='About',
+        year=datetime.now().year,
+        message='Your application description page.')
+
+
+@app.route('/contact')
+def contact():
+ return render_template(
+        'contact.html',
+        title='Contact',
+        year=datetime.now().year,
+        message='Моя contact page.'
+    )
