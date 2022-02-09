@@ -17,8 +17,6 @@ tasks:
     #   source activate flvenv
     #   pip install Flask  
 
-
-
   command: flask run
 
 ports:

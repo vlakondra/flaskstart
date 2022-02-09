@@ -18,12 +18,7 @@ tasks:
     #   pip install Flask  
 
 
-# List the start up tasks.   Learn more https://www.gitpod.io/docs/config-start-tasks/
-# tasks:
-#   - init: echo 'init script' # runs during prebuild
-  command: flask run
 
-# # List the ports to expose. Learn more https://www.gitpod.io/docs/config-ports/
 ports:
   - port: 5000
     onOpen: open-preview

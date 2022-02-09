@@ -1,6 +1,36 @@
 from app import app
 from datetime import datetime
 from flask import render_template
+from flask import request
+from markupsafe import escape
+
+#Экранирование!!!
+@app.route('/<name>')
+def safe(name):
+    return f"Привет {escape(name)}!"
+#subpath
+@app.route('/path/<path:somepath>')
+def pth(somepath):
+    return f'Somepath {escape(somepath)}'
+#float
+@app.route('/float/<float:idn>')
+def flt(idn):
+    return f'number: {isinstance(idn,float)} - {idn}'
+
+#multi
+@app.route('/mult/<one>/<two>')
+def mlt(one=None, two=999):
+    return  f'result {one}=={two}'
+    #safe('ccc') #
+
+#args  /args?one=qwer&two=asd&three=zxc
+@app.route('/args')
+def arg():
+    var1  = request.args.get('one', None)
+    var2  = request.args.get('two', None)
+    var3  = request.args.get('three', None)
+    return f'{var1} {var2} {var3}'
+
 
 
 @app.route('/')
