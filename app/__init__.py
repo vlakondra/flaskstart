@@ -9,3 +9,4 @@ app.config['SECRET_KEY'] = '123456789'
 toolbar = DebugToolbarExtension(app)
 
 from app import routes
+from app import special
