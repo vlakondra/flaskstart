@@ -1,2 +1,5 @@
 from app import app
-print('app2',app)
+
+if __name__ == "learnflask": #"__main__":
+    print('name ', __name__)
+    #tmp?? app.run()

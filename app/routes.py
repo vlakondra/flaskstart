@@ -24,12 +24,12 @@ def mlt(one=None, two=999):
     #safe('ccc') #
 
 #args  /args?one=qwer&two=asd&three=zxc
-@app.route('/args')
-def arg():
+@app.route('/args/<string:one>')
+def arg(*args):
     var1  = request.args.get('one', None)
     var2  = request.args.get('two', None)
     var3  = request.args.get('three', None)
-    return f'{var1} {var2} {var3}'
+    return f'<html><body>{var1} {var2} {var3}</body></html>'
 
 
 
