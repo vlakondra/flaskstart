@@ -4,6 +4,29 @@
 
 <h2>{{ title }}.</h2>
 <h3>{{ message }}</h3>
+<div>
+    <table class="table table-bordered table-hover">
+        <tr>
+            {% for s in word %}
+            <td>{{loop.index0}}</td>
+            {%endfor%}
+        </tr>
+        <tr>
+            {% for s in word %}
+            <td>{{s}}</td>
+            {%endfor%}
+        </tr>
+        <tr>
+            {% for s in word %}
+            <td>{{loop.index0-loop.length}}</td>
+            {%endfor%}
+        </tr>
+
+
+
+    </table>
+</div>
+
 
 <address>
     One Microsoft Way<br />
@@ -13,7 +36,7 @@
 </address>
 
 <address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
+    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
     <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
 </address>
 

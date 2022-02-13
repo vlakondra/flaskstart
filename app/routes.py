@@ -64,11 +64,13 @@ def about():
         year=datetime.now().year,
         message='Your application description page.')
 
-
+#https://jinja.palletsprojects.com/en/3.0.x/templates/#jinja-filters.length
+# https://www.digitalocean.com/community/tutorials/how-to-index-and-slice-strings-in-python-3-ru
 @app.route('/contact')
 def contact():
  return render_template(
         'contact.html',
+        word= "Hello world!",
         title='Contact',
         year=datetime.now().year,
         message='Моя contact page.'
