@@ -68,6 +68,7 @@ def about():
 # https://www.digitalocean.com/community/tutorials/how-to-index-and-slice-strings-in-python-3-ru
 @app.route('/contact')
 def contact():
+ app.logger.debug("???")   
  return render_template(
         'contact.html',
         word= "Hello world!",
