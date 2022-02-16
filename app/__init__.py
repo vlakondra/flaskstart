@@ -4,9 +4,11 @@ from flask_debugtoolbar import DebugToolbarExtension
 from logging.config import dictConfig
 from logging.handlers import WatchedFileHandler
 
+from flask_cors import CORS, cross_origin
+
 
 app = Flask(__name__)
-
+CORS(app, support_credentials=True)
 
 hnd = WatchedFileHandler('logger.log')
 dictConfig({
@@ -30,10 +32,12 @@ dictConfig({
 app.debug = True
 app.logger.addHandler(hnd)
 app.logger.debug('A value for debugging')
-app.logger.info('ww')
 
-print('app? ', app)
+
 app.config['SECRET_KEY'] = '123456789'
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS']=False
+app.config['CORS_HEADERS'] = 'Content-Type'
+
 # print(app.config)
 toolbar = DebugToolbarExtension(app)
 
