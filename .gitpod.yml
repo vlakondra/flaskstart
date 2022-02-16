@@ -12,6 +12,8 @@ tasks:
       
     pip install flask
     pip install flask-debugtoolbar
+    pip install flask-wtf
+    pip install flask-cors
   init:  |
     echo "проверка init"
     #   source activate flvenv
