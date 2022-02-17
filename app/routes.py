@@ -1,7 +1,7 @@
 from app import app
 from datetime import datetime
 from flask import render_template
-from flask import request
+from flask import request,session
 from markupsafe import escape
 
 #Экранирование!!!
@@ -69,6 +69,9 @@ def about():
 @app.route('/contact')
 def contact():
  app.logger.debug("???")   
+ var1  = session['username']
+ app.logger.debug(var1) 
+
  return render_template(
         'contact.html',
         word= "Hello world!",

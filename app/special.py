@@ -1,5 +1,5 @@
 from app import app
-from flask import render_template, redirect,url_for
+from flask import render_template, redirect,url_for,request,session
 from flask_cors import CORS, cross_origin
 from app.forms import LoginForm
 
@@ -18,5 +18,7 @@ def Safe(name):
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        return redirect(url_for('index',_external=True,_scheme='https'))
-    return render_template('login.html', title='Sign In', form=form)
+        # return redirect(url_for('index',_external=True,_scheme='https'))
+        session['username'] = request.form['username']
+        return redirect(request.origin +'/contact',302)
+    return render_template('login.html', title='Вход', form=form)

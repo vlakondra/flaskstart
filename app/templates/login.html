@@ -1,13 +1,21 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h1>Вход</h1>
-    <form  action="" method="post" novalidate>
-        <div >
+<h1>Вход</h1>
+<form action="" method="post" novalidate>
+    <div>
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}<br>
             {{ form.username(size=32) }}
+
+            {% if form.username.errors %}
+        <ul class="errors">
+            {% for error in form.username.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
         </p>
         <p>
             {{ form.password.label }}<br>
@@ -15,6 +23,6 @@
         </p>
         <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
         <p>{{ form.submit() }}</p>
-        </div>
-    </form>
+    </div>
+</form>
 {% endblock %}
