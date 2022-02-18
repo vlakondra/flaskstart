@@ -61,6 +61,7 @@ def about():
   return render_template(  
         'about.html',
         title='About',
+         username=session['username'],
         year=datetime.now().year,
         message='Your application description page.')
 
@@ -75,6 +76,7 @@ def contact():
  return render_template(
         'contact.html',
         word= "Hello world!",
+        username=session['username'],
         title='Contact',
         year=datetime.now().year,
         message='Моя contact page.'

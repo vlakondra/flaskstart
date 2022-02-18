@@ -20,8 +20,8 @@
 
         </p>
         <p>
-            {{ form.username.label }}
-            {{ form.username(size=32) }}
+            {{ form.username.label }}<br>
+            {{ form.username()}}
 
             {% if form.username.errors %}
         <ul class="errors">
@@ -39,4 +39,15 @@
         <p>{{ form.submit() }}</p>
     </div>
 </form>
+
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
 {% endblock %}
