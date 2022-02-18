@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_debugtoolbar import DebugToolbarExtension
-
+from flask import  session, request
 from logging.config import dictConfig
 from logging.handlers import WatchedFileHandler
 
@@ -40,6 +40,20 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 
 # print(app.config)
 toolbar = DebugToolbarExtension(app)
+
+
+@app.before_request
+def before_request_func():
+    if not session["test"]:
+      session["test"] = ["something"]
+    print("before_request is running!")
+
+
+@app.after_request
+def store_visted_urls(response):
+    session.modified = True
+    return response
+
 
 from app import routes
 from app import special

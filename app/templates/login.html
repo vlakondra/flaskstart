@@ -21,7 +21,7 @@
         </p>
         <p>
             {{ form.username.label }}<br>
-            {{ form.username()}}
+            {{ form.username(class="input",placeholder="Введите имя пользователя")}}
 
             {% if form.username.errors %}
         <ul class="errors">

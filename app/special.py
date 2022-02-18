@@ -1,11 +1,8 @@
 from app import app
-from flask import render_template, redirect,url_for,request,session,flash
+from flask import render_template, redirect,url_for,request,session
 from flask_cors import CORS, cross_origin
 from app.forms import LoginForm
 
-@app.route('/special/simple/<string:name>')
-def Safe(name):
-    return f"Привет {name}!!!!!!"
 
 
 # @app.route('/login')
