@@ -1,4 +1,6 @@
 from flask import Flask
+import os
+
 from flask_debugtoolbar import DebugToolbarExtension
 from flask import  session, request
 from logging.config import dictConfig
@@ -7,7 +9,10 @@ from logging.handlers import WatchedFileHandler
 from flask_cors import CORS, cross_origin
 
 
-app = Flask(__name__)
+
+
+app = Flask(__name__, template_folder='bulma')
+app.debug=True
 CORS(app, support_credentials=True)
 
 hnd = WatchedFileHandler('logger.log')
@@ -42,17 +47,17 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 toolbar = DebugToolbarExtension(app)
 
 
-@app.before_request
-def before_request_func():
-    if not session["test"]:
-      session["test"] = ["something"]
-    print("before_request is running!")
+# @app.before_request
+# def before_request_func():
+#     # if not session["test"]:
+#     #   session["test"] = ["something"]
+#     print("before_request is running!")
 
 
-@app.after_request
-def store_visted_urls(response):
-    session.modified = True
-    return response
+# @app.after_request
+# def store_visted_urls(response):
+#     session.modified = True
+#     return response
 
 
 from app import routes

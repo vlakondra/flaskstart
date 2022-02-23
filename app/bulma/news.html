@@ -1,0 +1,66 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="container">
+    {% set count = namespace(value=0) %}
+    {%for d in range(pairs) %}
+    <div class="columns">
+        {% if count.value < pairs %} <div class="column is-half">
+            {{count.value}}
+            {{data[count.value]['title_detail']['value']}}
+    </div>
+    <div class="column is-half">
+        {{count.value +1}}
+        {{data[count.value+1]['title_detail']['value']}}
+    </div>
+    {%endif%}
+</div>
+{% set count.value = count.value + 2 %}
+{% endfor %}
+
+<!-- <div class="columns">
+
+        <div class="column is-half">
+            <div class="card">
+                <div class="card-content">
+                    <header class="card-header">
+                        <p class="title">
+                            Card header
+                        </p>
+                    </header>
+                    <div class="content">
+                        Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi porta
+                        gravida
+                        at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+                        mus.
+                        Cras mattis consectetur purus sit amet fermentum.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="column is-half">
+            <div class="card">
+                <div class="card-content">
+                    <header class="card-header">
+                        <p class="title">
+                            Card header
+                        </p>
+                    </header>
+                    <div class="content">
+                        Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi porta
+                        gravida
+                        at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+                        mus.
+                        Cras mattis consectetur purus sit amet fermentum.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ -->
+
+</div>
+
+{% endblock%}

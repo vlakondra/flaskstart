@@ -1,35 +1,10 @@
 from app import app
 from datetime import datetime
+import feedparser 
 from flask import render_template
 from flask import request,session
 from markupsafe import escape
-
-#Экранирование!!!
-@app.route('/<name>')
-def safe(name):
-    return f"Привет {escape(name)}!"
-#subpath
-@app.route('/path/<path:somepath>')
-def pth(somepath):
-    return f'Somepath {escape(somepath)}'
-#float
-@app.route('/float/<float:idn>')
-def flt(idn):
-    return f'number: {isinstance(idn,float)} - {idn}'
-
-#multi
-@app.route('/mult/<one>/<two>')
-def mlt(one=None, two=999):
-    return  f'result {one}=={two}'
-    #safe('ccc') #
-
-#args  /args?one=qwer&two=asd&three=zxc
-@app.route('/args')
-def arg(*args):
-    var1  = request.args.get('one', None)
-    var2  = request.args.get('two', None)
-    var3  = request.args.get('three', None)
-    return f'<html><body>{var1} {var2} {var3}</body></html>'
+import math
 
 
 
@@ -42,18 +17,27 @@ def index():
         year=datetime.now().year,
     )
 
+@app.route('/news')
+def news():
+    
+    data = feedparser.parse('http://www.kommersant.ru/RSS/news.xml')
+    entr = data['entries']
+    todaydata= list(filter(lambda t: (t['published_parsed'].tm_year==2022 and
+                           t['published_parsed'].tm_mday == datetime.now().day),
+           entr))
+    
+    print("LEN!! ",len(todaydata))
+    
+    return render_template(
+        'news.html',
+        title='Новости',
+        pairs =math.ceil(len(entr)/2),
+        data=entr
+    )
 
-# def index():
-#     user = {'username': 'Miguel'}
-#     return '''
-# <html>
-#     <head>
-#         <title>Home Page - Microblog</title>
-#     </head>
-#     <body>
-#         <h1>Hello, ''' + user['username'] + '''!</h1>
-#     </body>
-# </html>'''
+
+
+
 
 
 @app.route('/about')

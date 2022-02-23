@@ -12,6 +12,7 @@ tasks:
       
     pip install flask
     pip install flask-debugtoolbar
+    pip install feedparser
     pip install flask-wtf
     pip install email-validator
     pip install flask-cors
