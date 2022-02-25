@@ -8,35 +8,32 @@ from logging.handlers import WatchedFileHandler
 
 from flask_cors import CORS, cross_origin
 
-
-
-
 app = Flask(__name__, template_folder='bulma')
 app.debug=True
 CORS(app, support_credentials=True)
 
-hnd = WatchedFileHandler('logger.log')
-dictConfig({
-    'version': 1,
-    'formatters': {'default': {
-        'format': '[%(asctime)s] %(levelname)s -in- %(module)s: %(message)s',
-    }},
-    'handlers': {'wsgi': {
-        'class': 'logging.StreamHandler',
-        'stream': 'ext://flask.logging.wsgi_errors_stream',
-        'formatter': 'default'
-    }},
-    'root': {
-        'level': 'INFO',
-        'handlers': ['wsgi']
-    }
-})
+# hnd = WatchedFileHandler('logger.log')
+# dictConfig({
+#     'version': 1,
+#     'formatters': {'default': {
+#         'format': '[%(asctime)s] %(levelname)s -in- %(module)s: %(message)s',
+#     }},
+#     'handlers': {'wsgi': {
+#         'class': 'logging.StreamHandler',
+#         'stream': 'ext://flask.logging.wsgi_errors_stream',
+#         'formatter': 'default'
+#     }},
+#     'root': {
+#         'level': 'INFO',
+#         'handlers': ['wsgi']
+#     }
+# })
 
 
 
 app.debug = True
-app.logger.addHandler(hnd)
-app.logger.debug('A value for debugging')
+# app.logger.addHandler(hnd)
+# app.logger.debug('A value for debugging')
 
 
 app.config['SECRET_KEY'] = '123456789'

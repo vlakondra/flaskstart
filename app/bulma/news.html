@@ -2,64 +2,81 @@
 
 {% block content %}
 <div class="container">
+    <h3>
+        {{data | length - 1 }}
+    </h3>
+
+
     {% set count = namespace(value=0) %}
-    {%for d in range(pairs) %}
+    {% for i in range(pairs-1) %}
+
     <div class="columns">
-        {% if count.value < pairs %} <div class="column is-half">
-            {{count.value}}
-            {{data[count.value]['title_detail']['value']}}
+        <div class="column is-one-third">
+            {{loop.index0 + i}}
+            {# {i}} #}
+            {{data[ count.value + i]['summary_detail']['value'] | safe}}
+
+        </div>
+        <div class="column is-one-third">
+            {{loop.index +i}}
+            {# {{ count.value}} #}
+            {{data[ count.value + i +1]['summary_detail']['value'] | safe}}
+        </div>
+
+        <div class="column is-one-third">
+            {{loop.index +i}}
+            {# {{i + count.value}} #}
+            {{data[ count.value + i +2]['summary_detail']['value'] | safe}}
+        </div>
     </div>
-    <div class="column is-half">
-        {{count.value +1}}
-        {{data[count.value+1]['title_detail']['value']}}
-    </div>
-    {%endif%}
+
+    {% set count.value=count.value + 2 %}
+    {% endfor %}
+
+
+    <!-- <div
+        class="columns">
+
+        <div class="column is-half">
+            <div class="card">
+                <div class="card-content">
+                    <header class="card-header">
+                        <p class="title">
+                            Card header
+                        </p>
+                    </header>
+                    <div class="content">
+                        Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi porta
+                        gravida
+                        at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+                        mus.
+                        Cras mattis consectetur purus sit amet fermentum.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="column is-half">
+            <div class="card">
+                <div class="card-content">
+                    <header class="card-header">
+                        <p class="title">
+                            Card header
+                        </p>
+                    </header>
+                    <div class="content">
+                        Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi porta
+                        gravida
+                        at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+                        mus.
+                        Cras mattis consectetur purus sit amet fermentum.
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
-{% set count.value = count.value + 2 %}
-{% endfor %}
-
-<!-- <div class="columns">
-
-        <div class="column is-half">
-            <div class="card">
-                <div class="card-content">
-                    <header class="card-header">
-                        <p class="title">
-                            Card header
-                        </p>
-                    </header>
-                    <div class="content">
-                        Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi porta
-                        gravida
-                        at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                        mus.
-                        Cras mattis consectetur purus sit amet fermentum.
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="column is-half">
-            <div class="card">
-                <div class="card-content">
-                    <header class="card-header">
-                        <p class="title">
-                            Card header
-                        </p>
-                    </header>
-                    <div class="content">
-                        Lorem ipsum leo risus, porta ac consectetur ac, vestibulum at eros. Donec id elit non mi porta
-                        gravida
-                        at eget metus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus
-                        mus.
-                        Cras mattis consectetur purus sit amet fermentum.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
- -->
+-->
 
 </div>
 

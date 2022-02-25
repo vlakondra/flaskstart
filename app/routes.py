@@ -19,19 +19,19 @@ def index():
 
 @app.route('/news')
 def news():
-    
-    data = feedparser.parse('http://www.kommersant.ru/RSS/news.xml')
+    ya='http://news.yandex.ru/Ukraine/index.rss'
+    km='http://www.kommersant.ru/RSS/news.xml'
+    data = feedparser.parse(ya)
     entr = data['entries']
-    todaydata= list(filter(lambda t: (t['published_parsed'].tm_year==2022 and
-                           t['published_parsed'].tm_mday == datetime.now().day),
-           entr))
     
-    print("LEN!! ",len(todaydata))
+    # todaydata= list(filter(lambda t: (t['published_parsed'].tm_mday==datetime.now().day ),
+    #        entr))
     
+       
     return render_template(
         'news.html',
         title='Новости',
-        pairs =math.ceil(len(entr)/2),
+        pairs =math.ceil(len(entr)/3),
         data=entr
     )
 
