@@ -24,8 +24,6 @@ def news():
     data = feedparser.parse(ya)
     entr = data['entries']
     
-    # todaydata= list(filter(lambda t: (t['published_parsed'].tm_mday==datetime.now().day ),
-    #        entr))
     
        
     return render_template(
