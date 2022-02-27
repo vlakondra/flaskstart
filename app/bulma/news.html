@@ -3,36 +3,55 @@
 {% block content %}
 <div class="container">
     <h3>
-        {{data | length - 1 }}
+        {{data | length }}
     </h3>
+    <h2>
+        {{rows }}
+    </h2>
 
 
-    {% set count = namespace(value=0) %}
-    {% for i in range(pairs-1) %}
+    {% set idxs = range(data | length) %}
+    {% set num = namespace(val=0) %}
 
-    <div class="columns">
-        <div class="column is-one-third">
-            {{loop.index0 + i}}
-            {# {i}} #}
-            {{data[ count.value + i]['summary_detail']['value'] | safe}}
+    {% set cols = namespace(val = cols) %}
+    {% set startidx = namespace(val = 0) %}
 
+    {% for row_idx in range(rows) %}
+    <div class="columns" style="border:1px solid #dedede">
+        {% for col_idx in range(startidx.val , startidx.val + cols.val) %}
+
+        {% if col_idx in idxs %}
+        <div class="column is-one-third" style="background-color: #f9f9f9;">
+            {{row_idx}}--{{col_idx}}
+            {{ data[col_idx]['summary_detail']['value'] | safe}}
         </div>
-        <div class="column is-one-third">
-            {{loop.index +i}}
-            {# {{ count.value}} #}
-            {{data[ count.value + i +1]['summary_detail']['value'] | safe}}
-        </div>
+        {% endif %}
 
-        <div class="column is-one-third">
-            {{loop.index +i+1}}
-            {# {{i + count.value}} #}
-            {{data[ count.value + i +2]['summary_detail']['value'] | safe}}
-        </div>
+        {%endfor%}
     </div>
 
-    {% set count.value=count.value + 2 %}
-    {% endfor %}
+    {% set startidx.val = startidx.val + cols.val %}
+    {%endfor%}
 
+
+
+    <div style="background-color: aqua; padding:1rem">
+        {% for i in range(2) %}
+        <div class="columns">
+            <div class="column is-half">
+                {{i + loop.index0}}
+                {{ data[i + loop.index0] ['summary_detail']['value'] | safe}}
+            </div>
+
+            {% if i + loop.index0 + 1 in idxs %}
+            <div class="column is-half">
+                {{i + loop.index0 + 1}}
+                {{data[i + loop.index0 + 1]['summary_detail']['value'] | safe}}
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
 
     <!-- <div
         class="columns">

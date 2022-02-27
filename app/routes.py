@@ -21,23 +21,21 @@ def index():
 def news():
     ya='http://news.yandex.ru/Ukraine/index.rss'
     km='http://www.kommersant.ru/RSS/news.xml'
+    cols =3
     data = feedparser.parse(ya)
     entr = data['entries']
     
     # todaydata= list(filter(lambda t: (t['published_parsed'].tm_mday==datetime.now().day ),
     #        entr))
-    
+    smallentr= entr[0:4]
        
     return render_template(
         'news.html',
         title='Новости',
-        pairs =math.ceil(len(entr)/3),
-        data=entr
+        cols=cols,
+        rows =math.ceil(len(smallentr)/cols),
+        data=smallentr
     )
-
-
-
-
 
 
 @app.route('/about')
