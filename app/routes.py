@@ -32,7 +32,7 @@ def news():
         # else:    
         #    ya='http://news.yandex.ru/Russia/index.rss'
        
-    km='http://www.kommersant.ru/RSS/news.xml'
+    # km='http://www.kommersant.ru/RSS/news.xml'
     
     cols =3
     data = feedparser.parse(ya)
