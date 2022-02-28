@@ -2,13 +2,14 @@
 
 {% block content %}
 <div class="container">
-    <h3>
-        {{data | length }}
-    </h3>
-    <h2>
-        {{rows }}
-    </h2>
-
+    <div>
+        <h3>
+            {{data | length }}
+        </h3>
+        <h2>
+            {{rows }}
+        </h2>
+    </div>
 
     {% set idxs = range(data | length) %}
     {% set num = namespace(val=0) %}

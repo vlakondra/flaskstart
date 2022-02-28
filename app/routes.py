@@ -17,17 +17,31 @@ def index():
         year=datetime.now().year,
     )
 
-@app.route('/news')
+@app.route('/news', methods=['GET', 'POST'])
 def news():
-    ya='http://news.yandex.ru/Ukraine/index.rss'
+    
+    if request.method == 'GET':
+        ya ='http://news.yandex.ru/Russia/index.rss'
+    
+    if request.method == 'POST':
+        form = (request.form)
+        ya =f'http://news.yandex.ru/{form["search_text"]}/index.rss'
+        
+        # if form['search_text'] == 'Ukraine':
+        #    ya='http://news.yandex.ru/Ukraine/index.rss'
+        # else:    
+        #    ya='http://news.yandex.ru/Russia/index.rss'
+       
     km='http://www.kommersant.ru/RSS/news.xml'
+    
     cols =3
     data = feedparser.parse(ya)
     entr = data['entries']
-    
-    # todaydata= list(filter(lambda t: (t['published_parsed'].tm_mday==datetime.now().day ),
-    #        entr))
+      
     smallentr= entr[0:4]
+    
+    if len(smallentr) == 0:
+        return render_template('404.html')
        
     return render_template(
         'news.html',
