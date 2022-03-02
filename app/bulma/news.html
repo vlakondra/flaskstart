@@ -2,58 +2,32 @@
 
 {% block content %}
 <div class="container">
-    <div>
+    <div style="padding:20px">
         <h3>
-            {{data | length }}
+            {{data | length }} -- Кол-во новостей
         </h3>
         <h2>
-            {{rows }}
+            {{rows }} -- {{cols}} -- Кол-во строк и колонок
         </h2>
     </div>
 
-    {% set idxs = range(data | length) %}
-
-    {% set cols = namespace(val = cols) %}
-    {% set startidx = namespace(val = 0) %}
-
-    {% for row_idx in range(rows) %}
-    <div class="columns" style="border:1px solid #dedede">
-        {% for col_idx in range(startidx.val , startidx.val + cols.val) %}
-
-        {% if col_idx in idxs %}
-        <div class="column is-one-third" style="background-color: #f9f9f9;">
-            {{row_idx}}--{{col_idx}}
-            {{ data[col_idx]['summary_detail']['value'] | safe}}
-        </div>
-        {% endif %}
-
-        {%endfor%}
-    </div>
-
-    {% set startidx.val = startidx.val + cols.val %}
-    {%endfor%}
-
-
-
-    <div style="background-color: aqua; padding:1rem">
-        {% for i in range(2) %}
-        <div class="columns">
-            <div class="column is-half">
-                {{i + loop.index0}}
-                {{ data[i + loop.index0] ['summary_detail']['value'] | safe}}
-            </div>
-
-            {% if i + loop.index0 + 1 in idxs %}
-            <div class="column is-half">
-                {{i + loop.index0 + 1}}
-                {{data[i + loop.index0 + 1]['summary_detail']['value'] | safe}}
-            </div>
-            {% endif %}
+    <div style="background-color: bisque;">
+        {% for row_idx in range(rows) %}
+        <div class="columns" style="border:1px solid #dedede">
+            {% for col_idx in range(row_idx * 3,
+            row_idx * 3 + 3 if row_idx < data | length // 3 else data | length ) %} <div class="column is-one-third">
+                {{row_idx}}--{{col_idx}}
+                {{ data[col_idx]['summary_detail']['value'] | safe}}
         </div>
         {% endfor %}
     </div>
+    {%endfor%}
+</div>
 
-    <!-- <div
+
+
+
+<!-- <div
         class="columns">
 
         <div class="column is-half">

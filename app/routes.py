@@ -38,7 +38,7 @@ def news():
     data = feedparser.parse(ya)
     entr = data['entries']
       
-    smallentr= entr[0:4]
+    smallentr= entr[0:6]
     
     if len(smallentr) == 0:
         return render_template('404.html')
