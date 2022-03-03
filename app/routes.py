@@ -24,7 +24,7 @@ def news():
         ya ='http://news.yandex.ru/Russia/index.rss'
     
     if request.method == 'POST':
-        form = (request.form)
+        form = request.form
         ya =f'http://news.yandex.ru/{form["search_text"]}/index.rss'
         
         # if form['search_text'] == 'Ukraine':
