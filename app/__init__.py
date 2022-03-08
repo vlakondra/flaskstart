@@ -24,17 +24,45 @@ def create_app(test_config=None):
                 template_folder='bulma')
     
     app.config.from_mapping(
-        SECRET_KEY='123456789')
+        SECRET_KEY='123456789',
+        DATABASE=os.path.join(app.instance_path, 'database')
+    )
+    
+    
+    print("DB? ",os.path.join(app.instance_path, 'database'))
+    try:
+        os.makedirs(app.instance_path)
+    except OSError:
+        pass
     
     toolbar = DebugToolbarExtension(app)
     
+    from app import db
+    # db.init_db(app)
+    
+    
     from . import routes,links
     from app.rts  import lnk
+    from app.general import gen_routes
     
+    from app.icons import icons
+        
+    app.register_blueprint(gen_routes.bp)
     app.register_blueprint(routes.bp)
     app.register_blueprint(links.bp)
     
-    app.register_blueprint(lnk.bp,options={'template_folder':'templ'})
+    app.register_blueprint(lnk.bp)
+    
+    app.register_blueprint(icons.icons_bp)
+    
+    # print(app.iter_blueprints)
+    # b= app.iter_blueprints()
+    # for x in b:
+    #     print(x,x.template_folder)
+    #     print(x.static_folder)
+    
+    db.init_db(app)
+    
     
     @app.route('/hello')
     def hello():

@@ -7,7 +7,7 @@ tasks:
     pyenv virtualenv flvenv
     source activate flvenv
 
-    export FLASK_APP=learnflask
+    export FLASK_APP=app
     export FLASK_ENV=development
       
     pip install flask

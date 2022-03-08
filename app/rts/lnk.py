@@ -6,13 +6,13 @@ from flask import (
 )
 
 
-bp = Blueprint('third', __name__, url_prefix='/third',template_folder='templ')
-
+bp = Blueprint('third', __name__, url_prefix='/third',template_folder='templates')
+print("name BP third ?? ", __name__) ##__name__  app.rts.lnk
 
 @bp.route('/mylink')
 def about():
   return render_template(  
-        'about.html',
+        'rts/about.html',
         title='About',
         year=datetime.now().year,
         message='Your application description page.')

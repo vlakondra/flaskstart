@@ -8,7 +8,7 @@ from flask import (
 
 
 bp = Blueprint('first', __name__, url_prefix='/first')
-
+print("name BP first ?? ", __name__) ## __name__ ---> app.routes
 
 from datetime import datetime
 import feedparser 
