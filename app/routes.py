@@ -1,4 +1,15 @@
-from app import app
+# from . import app
+
+import functools
+
+from flask import (
+    Blueprint, flash, g, redirect, render_template, request, session, url_for
+)
+
+
+bp = Blueprint('first', __name__, url_prefix='/first')
+
+
 from datetime import datetime
 import feedparser 
 from flask import render_template
@@ -8,16 +19,19 @@ import math
 
 
 
-@app.route('/')
-@app.route('/index')
+# @app.route('/')
+# @app.route('/index')
+@bp.route('/')
+@bp.route('/index')
 def index():
+    
     return render_template(
         'index.html',
         title='Home Page',
         year=datetime.now().year,
     )
 
-@app.route('/news', methods=['GET', 'POST'])
+@bp.route('/news', methods=['GET', 'POST'])
 def news():
     
     if request.method == 'GET':
@@ -52,7 +66,7 @@ def news():
     )
 
 
-@app.route('/about')
+@bp.route('/about')
 def about():
   return render_template(  
         'about.html',
@@ -63,17 +77,17 @@ def about():
 
 #https://jinja.palletsprojects.com/en/3.0.x/templates/#jinja-filters.length
 # https://www.digitalocean.com/community/tutorials/how-to-index-and-slice-strings-in-python-3-ru
-@app.route('/contact')
-def contact():
- app.logger.debug("???")   
- var1  = session['username']
- app.logger.debug(var1) 
+# @app.route('/contact')
+# def contact():
+#  app.logger.debug("???")   
+#  var1  = session['username']
+#  app.logger.debug(var1) 
 
- return render_template(
-        'contact.html',
-        word= "Hello world!",
-        username=session['username'],
-        title='Contact',
-        year=datetime.now().year,
-        message='Моя contact page.'
-    )
+#  return render_template(
+#         'contact.html',
+#         word= "Hello world!",
+#         username=session['username'],
+#         title='Contact',
+#         year=datetime.now().year,
+#         message='Моя contact page.'
+#     )

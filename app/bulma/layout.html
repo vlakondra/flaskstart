@@ -39,9 +39,11 @@
 
             <div id="navbarBasicExample" class="navbar-menu">
                 <div class="navbar-start">
-                    {{nav_link("index","Домой")}}
-                    {{nav_link("news","Новости")}}
 
+                    {{nav_link("first.index","Домой")}}
+                    {{nav_link("first.news","Новости")}}
+
+                    {#
                     <!-- <a href="{{ url_for('index')}}" class="navbar-item">
                         Домой
                     </a>
@@ -49,6 +51,7 @@
                     <a href="{{ url_for('news')}}" class=" navbar-item active">
                         Новости
                     </a> -->
+                    #}
 
                     <div class="navbar-item has-dropdown is-hoverable">
                         <a class="navbar-link">
