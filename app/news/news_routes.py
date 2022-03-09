@@ -4,7 +4,7 @@ from flask import (
 )
 
 bp_news = Blueprint('news', __name__, url_prefix='/news',template_folder='templates')
-print("name BP news ?? ", __name__) ## __name__ ---> app.routes
+print("name BP news ?? ", __name__) ## __name__ ---> app.news
 
 from datetime import datetime
 import feedparser 
