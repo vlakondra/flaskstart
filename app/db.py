@@ -6,8 +6,10 @@ from flask.cli import with_appcontext
 
 
 def close_db(e=None):
+    print("close_db")
     db = g.pop('db', None)
-
+    
+    print("close_db", type(g), db)
     if db is not None:
         db.close()
 

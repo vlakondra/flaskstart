@@ -25,11 +25,11 @@ def create_app(test_config=None):
     
     app.config.from_mapping(
         SECRET_KEY='123456789',
-        DATABASE=os.path.join(app.instance_path, 'database')
+        DATABASE=os.path.join(app.instance_path, 'database.db')
     )
     
     
-    print("DB? ",os.path.join(app.instance_path, 'database'))
+    print("DB? ",os.path.join(app.instance_path, 'database.db'))
     try:
         os.makedirs(app.instance_path)
     except OSError:
@@ -61,7 +61,7 @@ def create_app(test_config=None):
     #     print(x,x.template_folder)
     #     print(x.static_folder)
     
-    db.init_db(app)
+    db.init_app(app)
     
     
     @app.route('/hello')
