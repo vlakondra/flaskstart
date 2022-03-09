@@ -18,7 +18,6 @@ from flask import  session, request
 # from app import routes
 # from app import special
 def create_app(test_config=None):
-    print('create_APP')
     app = Flask(__name__, 
                 instance_relative_config=True, 
                 template_folder='bulma')
@@ -41,32 +40,28 @@ def create_app(test_config=None):
     # db.init_db(app)
     
     
-    from . import routes,links
-    from app.rts  import lnk
-    from app.general import gen_routes
+    # from . import routes,links
+    # from app.rts  import lnk
     
+    from app.general import gen_routes
+    from app.news import news_routes
+  
     from app.icons import icons
         
-    app.register_blueprint(gen_routes.bp)
-    app.register_blueprint(routes.bp)
-    app.register_blueprint(links.bp)
-    
-    app.register_blueprint(lnk.bp)
-    
+    app.register_blueprint(gen_routes.bp_gen)
+    app.register_blueprint(news_routes.bp_news)
     app.register_blueprint(icons.icons_bp)
     
-    # print(app.iter_blueprints)
-    # b= app.iter_blueprints()
-    # for x in b:
-    #     print(x,x.template_folder)
-    #     print(x.static_folder)
+    # app.register_blueprint(routes.bp)
+    # app.register_blueprint(lnk.bp)
+  
+    
     
     db.init_app(app)
     
-    
     @app.route('/hello')
     def hello():
-        return '<body>Hello, World!</body>'
+        return '<body>Тестовый маршрут!</body>'
     
     
     return app

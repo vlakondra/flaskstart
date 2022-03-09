@@ -6,7 +6,6 @@ from flask.cli import with_appcontext
 
 
 def close_db(e=None):
-    print("close_db")
     db = g.pop('db', None)
     
     print("close_db", type(g), db)
@@ -23,8 +22,6 @@ def get_db():
         g.db.row_factory = sqlite3.Row
 
     return g.db
-
-
 
 def init_db():
     db = get_db()

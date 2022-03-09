@@ -4,18 +4,16 @@ from flask import (
 
 from app import db
 
-
-
-bp = Blueprint('general', __name__, template_folder='templates')
+bp_gen = Blueprint('general', __name__, template_folder='templates')
 print('name - general',__name__, __name__)
 
-@bp.route('/')
-@bp.route('/index')
+@bp_gen.route('/')
+@bp_gen.route('/index')
 def index():
     d=db.get_db()
     print("database ", d)
     return render_template(
-    '/general2/index.html',
+    '/general/index.html',
     title='Home Page',
        
     )
