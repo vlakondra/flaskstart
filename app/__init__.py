@@ -27,8 +27,8 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'database.db')
     )
     
-    
     print("DB? ",os.path.join(app.instance_path, 'database.db'))
+
     try:
         os.makedirs(app.instance_path)
     except OSError:
@@ -37,12 +37,7 @@ def create_app(test_config=None):
     toolbar = DebugToolbarExtension(app)
     
     from app import db
-    # db.init_db(app)
-    
-    
-    # from . import routes,links
-    # from app.rts  import lnk
-    
+        
     from app.general import gen_routes
     from app.news import news_routes
   
@@ -51,17 +46,11 @@ def create_app(test_config=None):
     app.register_blueprint(gen_routes.bp_gen)
     app.register_blueprint(news_routes.bp_news)
     app.register_blueprint(icons.icons_bp)
-    
-    # app.register_blueprint(routes.bp)
-    # app.register_blueprint(lnk.bp)
-  
-    
-    
+        
     db.init_app(app)
     
     @app.route('/hello')
     def hello():
         return '<body>Тестовый маршрут!</body>'
-    
     
     return app
