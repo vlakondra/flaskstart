@@ -5,7 +5,7 @@ from flask import (
 from app import db
 
 bp_gen = Blueprint('general', __name__, template_folder='templates')
-print('name - general',__name__, __name__)
+print('name - general',__name__)
 
 @bp_gen.route('/')
 @bp_gen.route('/index')

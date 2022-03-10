@@ -1,7 +1,9 @@
 import functools
 from flask import (
-    Blueprint,  render_template, request, url_for
+    Blueprint,  render_template, request, url_for, current_app, g
 )
+
+
 
 bp_news = Blueprint('news', __name__, url_prefix='/news',template_folder='templates')
 print("name BP news ?? ", __name__) ## __name__ ---> app.news

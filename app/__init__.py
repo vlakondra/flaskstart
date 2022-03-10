@@ -24,7 +24,8 @@ def create_app(test_config=None):
     
     app.config.from_mapping(
         SECRET_KEY='123456789',
-        DATABASE=os.path.join(app.instance_path, 'database.db')
+        DATABASE=os.path.join(app.instance_path, 'database.db'),
+        COUNTRY='Russia'
     )
     
     print("DB? ",os.path.join(app.instance_path, 'database.db'))
@@ -40,11 +41,13 @@ def create_app(test_config=None):
         
     from app.general import gen_routes
     from app.news import news_routes
+    from app.auth import auth_routes
   
     from app.icons import icons
         
     app.register_blueprint(gen_routes.bp_gen)
     app.register_blueprint(news_routes.bp_news)
+    app.register_blueprint(auth_routes.bp_auth)
     app.register_blueprint(icons.icons_bp)
         
     db.init_app(app)

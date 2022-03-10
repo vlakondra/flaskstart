@@ -15,6 +15,7 @@ def close_db(e=None):
 
 def get_db():
     if 'db' not in g:
+        
         g.db = sqlite3.connect(
             current_app.config['DATABASE'],
             detect_types=sqlite3.PARSE_DECLTYPES
@@ -33,9 +34,9 @@ def init_db():
 @click.command('init-db')
 @with_appcontext
 def init_db_command():
-    """Clear the existing data and create new tables."""
+    """Чистит БД и создает новые таблицы"""
     init_db()
-    click.echo('Initialized the database.')
+    click.echo('БД создана')
 
 
 def init_app(app):
