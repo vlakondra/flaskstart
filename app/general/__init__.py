@@ -1,1 +1,1 @@
-print("init.py")
+print("General init.py")

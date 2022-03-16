@@ -2,12 +2,22 @@
 
 {% block content %}
 <div class="container">
-    <form style="width:300px; margin: 50px auto">
+  <div>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  {% for message in messages %}
+  {{ message }}
+  {% endfor %}
+  {% endif %}
+  {% endwith %}
+  </div>
+
+    <form style="width:300px; margin: 50px auto" action={{url_for('auth.register')}} method="POST">
       
       <div class="field">
         <label class="label">Логин</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-success" type="text" placeholder="Имя пользователя" value="">
+          <input class="input is-success" type="text" name="username" placeholder="Имя пользователя" value="">
           <span class="icon is-small is-left">
             <i class="fas fa-user"></i>
           </span>
@@ -21,7 +31,7 @@
       <div class="field">
         <label class="label">Пароль</label>
         <div class="control has-icons-left has-icons-right">
-          <input class="input is-danger" type="password" placeholder="Пароль" value="">
+          <input class="input is-danger" type="password" name='password' placeholder="Пароль" value="">
           <span class="icon is-small is-left">
             <i class="fas fa-lock"></i>
           </span>
