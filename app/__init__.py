@@ -32,7 +32,6 @@ def create_app(test_config=None):
 
     try:
         os.makedirs(app.instance_path)
-        
     except OSError:
         pass
     
