@@ -18,9 +18,9 @@ def register():
         error = None
 
         if not username:
-            error = 'Username is required.'
+            error = 'Введите имя пользователя'
         elif not password:
-            error = 'Password is required.'
+            error = 'Введите пароль'
 
         if error is None:
             try:
@@ -35,8 +35,50 @@ def register():
                 return redirect(url_for("auth.login"))
 
         flash(error)
-    return render_template('/auth/register.html')
+        
+    return render_template(
+        '/auth/register.html',
+        title='Регистрация',)
+
 
 @bp_auth.route('/login', methods=('GET', 'POST'))
 def login():
-    return render_template('/auth/login.html')
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        error = None
+        user = db.execute(
+            'SELECT * FROM user WHERE username = ?', (username,)
+        ).fetchone()
+
+        if user is None:
+            error = 'Неправильное имя пользователя.'
+        elif not check_password_hash(user['password'], password):
+            error = 'Неправильный пароль.'
+
+        if error is None:
+            session.clear()
+            session['user_id'] = user['id']
+            return redirect(url_for('general.index'))
+
+        flash(error)
+    return render_template(
+        '/auth/login.html',
+        title='Вход',)
+    
+@bp_auth.before_app_request
+def load_logged_in_user():
+    
+    user_id = session.get('user_id')
+
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = get_db().execute(
+            'SELECT * FROM user WHERE id = ?', (user_id,)
+        ).fetchone()
+        
+        print("load_logged_in_user", g.user, g.user['username'])
+    
+        
