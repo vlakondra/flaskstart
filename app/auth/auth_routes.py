@@ -79,6 +79,6 @@ def load_logged_in_user():
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
         
-        print("load_logged_in_user", g.user, g.user['username'])
+        print("load_logged_in_user", " - ", g.user['username'])
     
         
