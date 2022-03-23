@@ -86,6 +86,10 @@
                         </form>
                     </div>
                     <div class="navbar-item">
+                        {% if g.user %}
+                             <p>{{ g.user['username'] }}</p>
+                             <a href="{{ url_for('auth.logout') }}">Log Out</a>
+                        {% else %}
                         <div class="buttons">
                             <a class="button is-primary" href={{url_for("auth.register")}}>
                                 <strong>Sign up</strong>
@@ -94,6 +98,7 @@
                                 Log in
                             </a>
                         </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>

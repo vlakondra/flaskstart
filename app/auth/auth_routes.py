@@ -32,8 +32,8 @@ def register():
             except db.IntegrityError:
                 error = f"Пользователь {username} уже зарегистрирован."
             else:
-                return redirect(url_for("auth.login"))
-
+                # return redirect(url_for("auth.login",_external=True, _scheme='https'))
+                return redirect(request.origin+"/auth/login")
         flash(error)
         
     return render_template(
@@ -60,13 +60,24 @@ def login():
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            return redirect(url_for('general.index'))
+            # return redirect(url_for('general.index'))
+            return redirect(request.origin+url_for('general.index'))
 
         flash(error)
     return render_template(
         '/auth/login.html',
         title='Вход',)
+
+
+@bp_auth.route('/logout', methods=('GET', 'POST'))
+def logout():
+    session.clear()
+    # return redirect(request.origin + url_for('general.index'))
+    # return render_template('/general/index.html')
+    return redirect(request.referrer.split('/')[0] + url_for('general.index'))
     
+
+
 @bp_auth.before_app_request
 def load_logged_in_user():
     
@@ -79,6 +90,5 @@ def load_logged_in_user():
             'SELECT * FROM user WHERE id = ?', (user_id,)
         ).fetchone()
         
-        print("load_logged_in_user", " - ", g.user['username'])
-    
+   
         

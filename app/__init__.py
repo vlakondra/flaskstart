@@ -25,7 +25,8 @@ def create_app(test_config=None):
     app.config.from_mapping(
         SECRET_KEY='123456789',
         DATABASE=os.path.join(app.instance_path, 'database.db'),
-        COUNTRY='Russia'
+        COUNTRY='Russia',
+        DEBUG_TB_INTERCEPT_REDIRECTS = False
     )
     
     print("DB? ",os.path.join(app.instance_path, 'database.db'))
