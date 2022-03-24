@@ -44,7 +44,7 @@
 
                     {{nav_link("general.index","Домой")}}
                     {{nav_link("news.news","Новости")}}
-
+                 
                     {#
                     <!-- <a href="{{ url_for('index')}}" class="navbar-item">
                         Домой
@@ -56,10 +56,11 @@
                     #}
 
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link">
+                        <!-- <a class="navbar-link">
                             More
-                        </a>
-
+                        </a> -->
+                        {{nav_link("blog.index","Блоги")}} 
+                        
                         <div class="navbar-dropdown">
                             <a class="navbar-item">
                                 About
@@ -105,7 +106,9 @@
         </nav>
 
 
-
+        <header>
+            {% block header %}{% endblock %}
+        </header>
         {%block content%}{%endblock%}
     </section>
 

@@ -43,6 +43,7 @@ def create_app(test_config=None):
     from app.general import gen_routes
     from app.news import news_routes
     from app.auth import auth_routes
+    from app.blog import blog_routes
   
     from app.icons import icons
         
@@ -50,7 +51,8 @@ def create_app(test_config=None):
     app.register_blueprint(news_routes.bp_news)
     app.register_blueprint(auth_routes.bp_auth)
     app.register_blueprint(icons.icons_bp)
-        
+    app.register_blueprint(blog_routes.bp_blog)
+
     db.init_app(app)
     
     @app.route('/hello')

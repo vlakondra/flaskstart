@@ -69,6 +69,18 @@ def login():
         title='Вход',)
 
 
+def login_required(view):
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            # return redirect(url_for('auth.login'))
+            return redirect(request.referrer.split('/')[0] + url_for('auth.login'))
+
+        return view(**kwargs)
+
+    return wrapped_view
+
+
 @bp_auth.route('/logout', methods=('GET', 'POST'))
 def logout():
     session.clear()

@@ -1,0 +1,40 @@
+{% extends "layout.html" %}
+
+
+{% block header %}
+  <h1>{% block subtitle %}Новый пост{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+
+<form method="post" style="width:560px; margin: 10px auto;">
+  {#
+    <label for="title">Title</label>
+    <input name="title" id="title" value="{{ request.form['title'] }}" required>
+    #}
+    <div class="field">
+      <label class="subtitle is-small">Заголовок</label>
+      <div class="control">
+        <input class="input" name="title" id="title" value="{{ request.form['title'] }}"  type="text" required placeholder="Введите заголовок">
+      </div>
+    </div>
+   
+    
+    <div class="field">
+      <label for="body" class="subtitle is-small">Текст</label>
+      <div class="control">
+         <textarea name="body"
+            id="body
+            {{ request.form['body'] }} 
+            class="textarea"
+            style="border:1px solid #dedede; width:100%; max-width: 560px;"
+            placeholder="Введите текст"
+            rows="10">
+            </textarea>
+      </div>  
+  </div>
+    <input type="submit" value="Сохранить" class="button is-link ">
+    <input type="reset" value="Очистить" class="button is-link is-light">
+  </form>
+{%endblock%}
+

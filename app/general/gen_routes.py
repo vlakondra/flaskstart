@@ -10,8 +10,9 @@ print('name - general',__name__)
 @bp_gen.route('/')
 @bp_gen.route('/index')
 def index():
-    return render_template(
+  return render_template(
     '/general/index.html',
     title='Home Page',
-       
     )
+
+  
