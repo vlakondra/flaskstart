@@ -24,26 +24,3 @@ class RegForm(FlaskForm):
                               'placeholder':"повторите пароль",
                               'style':'margin-top:0px'} 
                             ) 
-
-
-    # passw = PasswordField('Пароль',   
-    #                     validators=[ DataRequired(), Length(max=20,min=6)],
-    #                     render_kw={'class':"input is-success",
-    #                     'placeholder':"введите пароль",
-    #                     'style':'margin-top:0px'}
-    #                     )                    
-
-class Passwords(FlaskForm):
-    password = PasswordField('Пароль',
-                             [InputRequired(), 
-                             EqualTo('confirm', message='пароли не совпадают')],
-                             render_kw={'class':"input is-success", 
-                             'placeholder':"введите пароль"},
-                            )
-   
-   
-    confirm  = PasswordField('Повторите пароль' ,
-                              render_kw={'class':"input is-success",
-                              'placeholder':"повторите пароль",
-                              'style':'margin-top:0px'} 
-                            )                        
