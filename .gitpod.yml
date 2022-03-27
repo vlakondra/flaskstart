@@ -15,7 +15,6 @@ tasks:
     pip install feedparser
     pip install flask-wtf
     pip install email-validator
-    pip install flask-cors
   init:  |
     echo "проверка init"
     #   source activate flvenv

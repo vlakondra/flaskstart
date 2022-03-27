@@ -7,16 +7,10 @@ from flask import  session, request
 # app = Flask(__name__, template_folder='bulma')
 # app.debug=True
 
-# app.config['SECRET_KEY'] = '123456789'
-# app.config['DEBUG_TB_INTERCEPT_REDIRECTS']=False
-# app.config['CORS_HEADERS'] = 'Content-Type'
-
-# toolbar = DebugToolbarExtension(app)
-
-
 # from . import db
 # from app import routes
 # from app import special
+
 def create_app(test_config=None):
     app = Flask(__name__, 
                 instance_relative_config=True, 
@@ -36,7 +30,7 @@ def create_app(test_config=None):
     except OSError:
         pass
     
-    toolbar = DebugToolbarExtension(app)
+    # toolbar = DebugToolbarExtension(app)
     
     from app import db
         

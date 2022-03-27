@@ -6,8 +6,21 @@ from flask import (
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from app.db import get_db
+from app.forms import RegForm,Passwords
 
 bp_auth = Blueprint('auth', __name__, url_prefix='/auth',template_folder="templates")
+
+@bp_auth.route('/wtregister', methods=('GET', 'POST'))
+def wtregister():
+    form = RegForm()
+    # passw= Passwords()
+
+    if form.validate_on_submit():
+        return redirect(request.origin + "/auth/login")
+
+    print("??",form.validate_on_submit(),form.name.errors, form.password.errors,form.confirm.errors  )  
+    return render_template('/auth/wtregister.html', form=form)
+
 
 @bp_auth.route('/register', methods=('GET', 'POST'))
 def register():
