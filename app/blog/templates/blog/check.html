@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block header %}
+  {%if posts | length >0%}
+  <h1 class="title" style="margin-bottom: 30px;">
+    {% block title %}Все Тексты{% endblock %}
+  </h1>
+  {%else%}
+  <h1 class="subtitle">Тексты не найдены</h1>
+  {%endif%}
+{% endblock %}
+
+{% block content %}
+  <form action ={{url_for('blog.check')}} method="POST">
+   
+  {% for post in posts %}
+    <article style="width:560px">
+      <header>
+        <div>
+          <h2 class="subtitle">{{ post['title'] }}</h2>
+          <div>
+            <span class="tag is-primary">
+              автор: {{ post['username'] }} 
+            </span> 
+            <span class="tag is-primary">
+              дата: {{ post['created'].strftime('%d-%m-%Y') }}
+            </span>
+<span>
+  <input type="text" name="id" value={{post['id']}}>
+</span>
+<span>
+    Удалить: <input type="checkbox" name="check" {{'checked' if post['del'] else ''}} value={{post['id']}}>
+</span>
+
+            <a class="tag is-link" href="{{ url_for('blog.update', id=post['id']) }}">Изменить</a>
+          </div>
+        </div>
+        {% if g.user['id'] == post['author_id'] %}
+        {#
+          <a class="action" href="{{ url_for('blog.update', id=post['id']) }}">Edit</a>
+          #}
+          {% endif %}
+      </header>
+      <p class="body">{{ post['body'] }}</p>
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+  {% endfor %}
+  <input type="submit" value="Выполнить">
+</form>
+
+{% if g.user %}
+    <div class="buttons" style="margin-top:30px">
+        <a class="button is-primary is-small is-link" href={{url_for("blog.create")}}>
+            <strong>Создать новый блог</strong>
+        </a>
+    </div>    
+  {% endif %}
+
+  {% endblock %}

@@ -20,6 +20,33 @@ def index():
 
     return render_template('blog/index.html', posts=posts)
 
+
+@bp_blog.route('/check', methods=('GET', 'POST'))
+@login_required
+def check():
+   db = get_db()
+   print('?????')
+   if request.method == 'POST':
+ 
+       for key in request.form.keys():
+        #    if key == 'check[]':
+               for value in request.form.getlist(key):
+                 print("KEYS", key,":",value)    
+                #  db.execute('DELETE FROM post WHERE id = ?', (value))
+       
+    #    db.commit()
+
+       return redirect(request.origin + url_for('blog.index'))
+
+   posts = db.execute(
+        'SELECT p.id, title, body, created, author_id, username, false as del'
+        ' FROM post p JOIN user u ON p.author_id = u.id'
+        ' ORDER BY created DESC'
+    ).fetchall()
+
+    
+   return render_template('blog/check.html', posts=posts)
+
 @bp_blog.route('/create', methods=('GET', 'POST'))
 @login_required
 def create():
