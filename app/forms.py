@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, TextAreaField
+from wtforms import StringField, FieldList, BooleanField, PasswordField, TextAreaField
 from wtforms.validators import DataRequired,InputRequired,EqualTo,Length
 # from  wtforms import validators
 
@@ -24,3 +24,8 @@ class RegForm(FlaskForm):
                               'placeholder':"повторите пароль",
                               'style':'margin-top:0px'} 
                             ) 
+
+
+class CheckForm(FlaskForm):
+    # chk = FieldList(BooleanField('check')) 
+    chk = BooleanField('check')                    

@@ -25,16 +25,19 @@ def index():
 @login_required
 def check():
    db = get_db()
-   print('?????')
    if request.method == 'POST':
- 
+       
+       print(list(request.form.items())) #здесь  видны только отмеченные check's, а также эл-ты с 0-индесом
+       
+       print('getlist',request.form.getlist('check'))
+       
        for key in request.form.keys():
-        #    if key == 'check[]':
+            if key == 'check':
                for value in request.form.getlist(key):
                  print("KEYS", key,":",value)    
-                #  db.execute('DELETE FROM post WHERE id = ?', (value))
+                 db.execute('DELETE FROM post WHERE id = ?', (value))
        
-    #    db.commit()
+       db.commit()
 
        return redirect(request.origin + url_for('blog.index'))
 

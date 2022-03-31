@@ -13,6 +13,8 @@ bp_auth = Blueprint('auth', __name__, url_prefix='/auth',template_folder="templa
 @bp_auth.route('/wtregister', methods=('GET', 'POST'))
 def wtregister():
     form = RegForm()
+    
+    print('formdata',form.data)
 
     if form.validate_on_submit():
         return redirect(request.origin + "/auth/login")
