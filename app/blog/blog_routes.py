@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, url_for
+    Blueprint, flash, g, redirect, render_template, request, url_for,jsonify
 )
 from werkzeug.exceptions import abort
 
@@ -49,6 +49,25 @@ def check():
 
     
    return render_template('blog/check.html', posts=posts)
+
+
+
+@bp_blog.route('/jscheck', methods=('GET', 'POST'))
+@login_required
+def jscheck():
+  
+   if request.method=='POST':
+        db = get_db()
+        a=request.form.getlist("data[]")
+        print('A',a)
+        for x in a:
+            print('blog id: ',x)
+
+
+   return jsonify(result='OK')
+   
+
+
 
 @bp_blog.route('/create', methods=('GET', 'POST'))
 @login_required

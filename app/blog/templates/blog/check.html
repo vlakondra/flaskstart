@@ -12,11 +12,45 @@
         {{post['title']}}
       </td>
       <td>
-        <input type="checkbox" name="check" {{'checked' if post.del else ''}} value={{post.id}}>
+        <input type="checkbox" class="checkbox" name="check" {{'checked' if post.del else ''}} value={{post.id}}>
       </td>
      </tr>
     {%endfor%}
     </table>
   <input type="submit" value="Выполнить">
+  
 </form>
+<button id ="jbtn">JSON</button>
+<script>
+  $(function(){
+
+
+    $("#jbtn").click(function(){
+  var arr=[];
+
+  $("tr").each(function(){
+    //console.log($(this).children()[1])
+    console.log($(this).prop('checked'))
+    arr.push($(this).val());
+  });
+
+  $.ajax({
+    url:'{{url_for("blog.jscheck")}}',
+    type:'post',
+    data:{data:arr},
+    success:function(res){
+      if(res['result']=='OK'){
+         console.log("rres",res)
+         //window.location.replace("{{url_for('blog.index')}}");
+
+      }
+    }
+  });
+
+});
+
+
+
+  })
+</script>
 {% endblock %}
