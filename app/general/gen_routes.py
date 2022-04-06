@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for
+    Blueprint, flash, g, redirect, render_template, request, session, url_for,jsonify
 )
 
 from app import db
@@ -15,4 +15,13 @@ def index():
     title='Home Page',
     )
 
-  
+@bp_gen.route('/getdata')
+def get_data():
+  text = request.args.get('txt', 0, type=str)
+
+  if text.lower() == 'python':
+			return jsonify(result='Выбран правильный язык')
+  else:
+			return jsonify(result='Попробуйте еще')
+
+

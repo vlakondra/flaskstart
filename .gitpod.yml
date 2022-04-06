@@ -31,3 +31,5 @@ vscode:
     - ms-python.python
     - ms-toolsai.jupyter
     - samuelcolvin.jinjahtml
+    - ms-toolsai.jupyter-keymap
+    - ms-toolsai.jupyter-renderers

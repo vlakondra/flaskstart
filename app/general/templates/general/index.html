@@ -5,6 +5,50 @@
     <h1>GENERAL</h1>
     <h2>Home Page</h2>
     <p>
-        <img src= '/icons/one.svg' style="width:20px;border:10px solid blue">
+        <img id="timg" src= '/icons/one.svg' style="width:50px;border:1px solid blue">
     </p>
+    <p>
+        <button id="hide">Скрыть</button>
+        <button id="show">Показать</button>
+        <button id="toggle">Переключить</button>
+    </p>
+    <p style="margin-top:30px">
+        
+        <label>
+            Укажите язык прогр-я
+            <input id="inp" name="inp" type="text" value="" placeholder="любой текст" >
+        </label>
+        <button id="btn">Получить данные</button>
+        <p id="res"></p>
+    </p>
+    <script>
+        $(function() {
+          $('#timg').bind('click', function() {
+           alert('!!! ' + $('h2').text())
+        });
+
+        $("#hide").click(function(){
+            $("#timg").hide();
+        });
+        $("#show").click(function(){
+            $("#timg").show();
+        });
+        $('#toggle').click(function(){
+            $('#timg').toggle()
+        })
+
+        $('#btn').click(function(){
+
+            $.getJSON('{{url_for("general.get_data")}}', {
+				  txt: $('input[name="inp"]').val(),
+				}, function(data) {
+				  $("#res").text(data.result);
+				});
+				// return false;
+			  });
+
+    })
+      </script>
+
+
 {% endblock content %}
