@@ -25,3 +25,25 @@ def get_data():
 			return jsonify(result='Попробуйте еще')
 
 
+@bp_gen.route('/session')
+def session():
+  return render_template(
+    '/general/session.html',
+    title='Сессия',
+    )
+
+
+@bp_gen.route('/getsession')
+def get_session():
+  if request.method == 'GET':
+    data={
+      'fam':request.args.get('fam'),
+      'age': request.args.get('age'),
+      'session':[{'математика':5},
+                  {'Экономика':4},
+                  {'Информатика':5}]
+    }
+
+    print(data)
+
+    return jsonify(data)
