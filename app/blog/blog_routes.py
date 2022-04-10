@@ -6,6 +6,8 @@ from werkzeug.exceptions import abort
 from app.auth.auth_routes import login_required
 from app.db import get_db
 
+import json
+
 bp_blog = Blueprint('blog', __name__,url_prefix='/blog',template_folder="templates")
 
 
@@ -58,13 +60,21 @@ def jscheck():
   
    if request.method=='POST':
         db = get_db()
-        a=request.form.getlist("data[]")
-        print('A',a)
-        for x in a:
-            print('blog id: ',x)
+        keys=request.form.keys() #получим все ключи
+        
+        lst_keys= list(keys) #преобразуем их в список
+        key = lst_keys[0] #возьмем 1-й и единственный ключ
+        #этот ключ представляет строковое выражение исходного массива объектов
+        jsn  = json.loads(key) # построим JSON-объект из строки
+        print('JSON ', jsn)
+
+        for x in jsn['arr']: # arr - это единственный ключ; его значение - список
+            print('curr obj: ',x)
+            x['name'] =x['name'].upper()
+            x['age']+=5
 
 
-   return jsonify(result='OK')
+   return jsonify(result=jsn['arr'])
    
 
 

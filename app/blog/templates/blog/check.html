@@ -1,55 +1,101 @@
 {% extends "layout.html" %}
 
 {% block content %}
-  <form id="bfrm" action ={{url_for('blog.check')}} method="POST">
-    <table class="table is-bordered is-striped is-hoverable is-fullwidth">
-    {% for post in posts %}
-     <tr>
-       <td>
-         {{post['username']}}
-       </td>
-       <td>
-        {{post['title']}}
+
+<div style="margin: 30px">
+  <div id="tbl" style="margin: 30px">
+  </div>
+
+  <button id="show_btn">Show JSON</button>
+</div>
+
+<hr style="background-color: #68b831;">
+
+<div style="margin: 30px">
+
+  <table id="people">
+    <tr>
+      <td>
+        <input type="text" name="id" value="5">
       </td>
       <td>
-        <input type="checkbox" class="checkbox" name="check" {{'checked' if post.del else ''}} value={{post.id}}>
+        <input type="text" name="fam" value="Иванов">
       </td>
-     </tr>
-    {%endfor%}
-    </table>
-  <input type="submit" value="Выполнить">
-  
-</form>
-<button id ="jbtn">JSON</button>
+    </tr>
+    <tr>
+      <td>
+        <input type="text" name="id" value="6">
+      </td>
+      <td>
+        <input type="text" name="fam" value="Петров">
+      </td>
+    </tr>
+  </table>
+  <button id="create_btn">Create JSON</button>
+  <div id="js_result">
+    Результат:
+  </div>
+</div>
+
 <script>
-  $(function(){
+  $(function () {
+
+    $("#show_btn").click(function () {
+      var ttt = [
+        { id: 1, name: 'Иванов', age: 22 },
+        { id: 2, name: 'Петров', age: 23 },
+        { id: 3, name: 'Сидоров', age: 21 }
+      ];
+
+      $.ajax({
+        url: '{{url_for("blog.jscheck")}}',
+        type: 'post',
+        data: JSON.stringify({ arr: ttt }),
+        success: function (res) {
+          if (res['result']) {
+            console.log("rres", res)
+            var tbl = '<table class="table is-bordered">'
+            //Рендеринг json-результата
+            $.each(res['result'], function (k, v) {
+              console.log(k, v)
+              // tbl += '<tr><td>' + v.id + '</td><td>' + v.name + '</td></tr>';
+              tbl += `<tr><td>${v.id}</td><td>${v.name}</td><td>${v.age}</td></tr>`
+            })
+            tbl += "</table>"
+            $('#tbl').append(tbl);
+            //window.location.replace("{{url_for('blog.index')}}");
+          }
+        }
+      });
+    });
+
+    $("#create_btn").click(function () {
+      arr = []
+      $.each($("#people tr"), function () {
+        var $row = $(this), rowObj = {};
+        // console.log($row)
+
+        $.each($("td", $row), function () {
+          var inp = $(this).children("input");
+
+          console.log(inp, $(inp).prop('name'), $(inp).prop('value'))
+
+          rowObj[$(inp).prop('name')] = $(inp).prop('value') // => {id:5, name:'Иванов' }
+          // console.log('rowObj', rowObj)
+        })
+        arr.push(rowObj)
+        console.log(arr)
+
+        jsn = JSON.stringify({ people: arr })
+        console.log(jsn)
 
 
-    $("#jbtn").click(function(){
-  var arr=[];
-  var farr = $('#bfrm').serializeArray()
-  console.log(farr)
+      })
+      $("#js_result p").empty()
+      $("#js_result").append('<p>' + jsn + '</p>')
 
-  $(".checkbox").each(function(){
-    //console.log($(this).children()[1])
-    console.log($(this).prop('checked'))
-    arr.push($(this).val());
-  });
+    })
 
-  $.ajax({
-    url:'{{url_for("blog.jscheck")}}',
-    type:'post',
-    data:{data:arr},
-    success:function(res){
-      if(res['result']=='OK'){
-         console.log("rres",res)
-         //window.location.replace("{{url_for('blog.index')}}");
-
-      }
-    }
-  });
-
-});
 
 
 

@@ -1,62 +1,69 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <div class="container content" style="width:400px;">
+<div class="container content" style="width:400px;">
     <h1>JQUERY - AJAX</h1>
     <hr>
     <h2>Студент</h3>
-    <div>
-        <label for="fam">Фамилия</label>
-        <input id="fam" type="text" name="fam">
-    </div>
-    <div>
-        <label for="age">Возраст</label>
-        <input id="age"  type="number" name="age" style="margin-left:9px">
-    </div>
-    <div style="margin-top:20px">
-        <button id="go" name="go">Последняя сессия</button>
-    </div> 
-    <hr>
-     <h3>Результаты</h3>
-     <div id="res">
+        <div>
+            <label for="fam">Фамилия</label>
+            <input id="fam" type="text" name="fam">
+        </div>
+        <div>
+            <label for="age">Возраст</label>
+            <input id="age" type="number" name="age" style="margin-left:9px">
+        </div>
+        <div style="margin-top:20px">
+            <button id="go" name="go">Последняя сессия</button>
+        </div>
+        <hr>
+        <h3>Результаты??</h3>
+        <div id="res">
 
-     </div>
-    </div>
-    <script>
-     $(function(){
-     
-        $('#go').click(function(){
-           let std = { 
-                       fam: $('input[name="fam"]').val(),
-                       age: $('input[name="age"]').val() 
-                    } 
+        </div>
+</div>
+
+<div>
+    ???!!
+</div>
+
+
+
+<script>
+    $(function () {
+
+        $('#go').click(function () {
+            let std = {
+                fam: $('input[name="fam"]').val(),
+                age: $('input[name="age"]').val()
+            }
             console.log(std)
 
-            $.getJSON('{{url_for("general.get_session")}}', std, function(data) {
-                let items =[]
-                
-                $.each( data.session, function( key, val ) {
-                  items.push( "<li>" + Object.keys(val)[0] + ": " +val[Object.keys(val)[0]]  + "</li>" );
+            $.getJSON('{{url_for("general.get_session")}}', std, function (data) {
+                let items = []
+
+                $.each(data.session, function (key, val) {
+                    items.push("<li>" + Object.keys(val)[0] + ": " + val[Object.keys(val)[0]] + "</li>");
                 });
 
                 console.log(items)
-                
-                   $("#res").empty()
 
-                    $( "<ul/>", {
-                        html: items.join( "" )
-                        }).appendTo( $('#res') );
+                $("#res").empty()
 
-                    $("#res").prepend('<h2>' + data.fam +'</h2>')    
+                $("<ul/>", {
+                    html: items.join("")
+                }).appendTo($('#res'));
 
-				});
-                
-                    }
-          
+                $("#res").prepend('<h2>' + data.fam + '</h2>')
+
+            });
+
+        }
+
         )
 
-     })
+    })
 
 
-    </script>
-{%endblock%}    
+</script>
+{% endblock %}
