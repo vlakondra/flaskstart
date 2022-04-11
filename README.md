@@ -8,4 +8,4 @@ https://flask-wtf.readthedocs.io/
 
 ---
 
-request.form['data[0][name]']
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleDateString
