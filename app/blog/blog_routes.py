@@ -63,18 +63,18 @@ def jscheck():
         keys=request.form.keys() #получим все ключи
         
         lst_keys= list(keys) #преобразуем их в список
-        key = lst_keys[0] #возьмем 1-й и единственный ключ
+        key = lst_keys[0] #возьмем 1-й и единственный ключ - arr
         #этот ключ представляет строковое выражение исходного массива объектов
         jsn  = json.loads(key) # построим JSON-объект из строки
         print('JSON ', jsn)
 
-        for x in jsn['arr']: # arr - это единственный ключ; его значение - список
+        for x in jsn['arr']: # arr - это единственный ключ; его значение - список объектов
             print('curr obj: ',x)
-            x['name'] =x['name'].upper()
-            x['age']+=5
+            x['name'] = x['name'].upper()
+            x['age'] += 5
 
 
-   return jsonify(result=jsn['arr'])
+   return jsonify(result = jsn['arr'])
    
 
 

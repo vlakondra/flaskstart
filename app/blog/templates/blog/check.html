@@ -51,6 +51,7 @@
         url: '{{url_for("blog.jscheck")}}',
         type: 'post',
         data: JSON.stringify({ arr: ttt }),
+
         success: function (res) {
           if (res['result']) {
             console.log("rres", res)
@@ -63,7 +64,7 @@
             })
             tbl += "</table>"
             $('#tbl').append(tbl);
-            //window.location.replace("{{url_for('blog.index')}}");
+            //window.location.replace("{{url_for('blog.index')}}"); <- redirect
           }
         }
       });
@@ -71,16 +72,16 @@
 
     $("#create_btn").click(function () {
       arr = []
-      $.each($("#people tr"), function () {
-        var $row = $(this), rowObj = {};
+      $.each($("#people tr"), function () { //<- все строки в таблице
+        var $row = $(this), rowObj = {}; //2 переменные
         // console.log($row)
 
-        $.each($("td", $row), function () {
-          var inp = $(this).children("input");
+        $.each($("td", $row), function () { //<- все td в строке
+          var inp = $(this).children("input"); // в td только 1 доч-й эл-т - input
 
           console.log(inp, $(inp).prop('name'), $(inp).prop('value'))
 
-          rowObj[$(inp).prop('name')] = $(inp).prop('value') // => {id:5, name:'Иванов' }
+          rowObj[$(inp).prop('name')] = $(inp).prop('value') //строим JSON => {id:5, name:'Иванов' }
           // console.log('rowObj', rowObj)
         })
         arr.push(rowObj)
@@ -95,10 +96,7 @@
       $("#js_result").append('<p>' + jsn + '</p>')
 
     })
-
-
-
-
   })
+
 </script>
 {% endblock %}
