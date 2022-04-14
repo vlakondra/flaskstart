@@ -7,11 +7,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }} - My Flask Application</title>
+
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+
+    <link rel="stylesheet" href="{{  url_for('static', filename='content/owl/owl.carousel.min.css') }}">
+    <link rel="stylesheet" href="{{  url_for('static', filename='content/owl/owl.theme.default.min.css') }}">
+
     <script src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
 
     <script src="{{ url_for('static', filename='scripts/jquery-3.6.0.min.js') }}"></script>
-
+    <script src="{{ url_for('static', filename='scripts/owl.carousel.min.js') }}"></script>
 
 </head>
 
@@ -47,7 +52,7 @@
 
                     {{nav_link("general.index","Домой")}}
                     {{nav_link("news.news","Новости")}}
-                 
+
                     {#
                     <!-- <a href="{{ url_for('index')}}" class="navbar-item">
                         Домой
@@ -62,8 +67,8 @@
                         <!-- <a class="navbar-link">
                             More
                         </a> -->
-                        {{nav_link("blog.index","Блоги")}} 
-                        
+                        {{nav_link("blog.index","Блоги")}}
+
                         <div class="navbar-dropdown">
                             <a class="navbar-item">
                                 About
@@ -91,8 +96,8 @@
                     </div>
                     <div class="navbar-item">
                         {% if g.user %}
-                             <p>{{ g.user['username'] }}</p>
-                             <a href="{{ url_for('auth.logout') }}">Log Out</a>
+                        <p>{{ g.user['username'] }}</p>
+                        <a href="{{ url_for('auth.logout') }}">Log Out</a>
                         {% else %}
                         <div class="buttons">
                             <a class="button is-primary" href={{url_for("auth.register")}}>

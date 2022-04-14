@@ -21,6 +21,9 @@
       <td>
         <input type="text" name="fam" value="Иванов">
       </td>
+      <td>
+        <input type="checkbox" checked name="do" value="1">
+      </td>
     </tr>
     <tr>
       <td>
@@ -29,9 +32,15 @@
       <td>
         <input type="text" name="fam" value="Петров">
       </td>
+      <td>
+        <input type="checkbox" name="do" value="0">
+      </td>
     </tr>
   </table>
   <button id="create_btn">Create JSON</button>
+
+  <button id="test_btn">TEST JQUERY</button>
+
   <div id="js_result">
     Результат:
   </div>
@@ -70,6 +79,21 @@
       });
     });
 
+
+    $("#test_btn").click(function () {
+
+      $('div').each(function (k, v) {
+        console.log($(this))
+        console.log('div_' + k + ':' + $(this).attr('id') + "==" + $(this).prop('id'));
+      })
+
+
+    })
+
+
+
+
+
     $("#create_btn").click(function () {
       arr = []
       $.each($("#people tr"), function () { //<- все строки в таблице
@@ -77,12 +101,13 @@
         // console.log($row)
 
         $.each($("td", $row), function () { //<- все td в строке
-          var inp = $(this).children("input"); // в td только 1 доч-й эл-т - input
+          var inp = $(this).children("input").first(); // в td только 1 доч-й эл-т - input
 
           console.log(inp, $(inp).prop('name'), $(inp).prop('value'))
-
-          rowObj[$(inp).prop('name')] = $(inp).prop('value') //строим JSON => {id:5, name:'Иванов' }
-          // console.log('rowObj', rowObj)
+          if ($(inp).prop('type') == "checkbox") {
+            rowObj[$(inp).prop('name')] = $(inp).prop('checked') //строим JSON => {id:5, name:'Иванов' }
+            // console.log('rowObj', rowObj)
+          }
         })
         arr.push(rowObj)
         console.log(arr)
