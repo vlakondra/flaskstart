@@ -3,9 +3,35 @@
 {% block content %}
 
 <div class="container carusel">
+
     <div class="owl-carousel owl-theme">
-        <div class="item">Content 1</div>
-        <div class="item">Content 2</div>
+        <div class="item card">
+            <div class='card-content'>
+                Президент России Владимир Путин поддержал идею поднимать флаг и исполнять гимн в школах. Глава
+                государства
+                при этом подчеркнул, что там, где данное мероприятие пока невозможно организовать на достойном уровне,
+                лучше
+                его перенести.
+                Президент России Владимир Путин поддержал идею поднимать флаг и исполнять гимн в школах. Глава
+                государства
+                при этом подчеркнул, что там, где данное мероприятие пока невозможно организовать на достойном уровне,
+                лучше
+                его перенести.
+                Президент России Владимир Путин поддержал идею поднимать флаг и исполнять гимн в школах. Глава
+                государства
+                при этом подчеркнул, что там, где данное мероприятие пока невозможно организовать на достойном уровне,
+                лучше
+                его перенести.
+            </div>
+
+        </div>
+        <div class='item card'>
+            <div class='card-content'>
+                Следком РФ имеет полное право возбудить уголовное дело и объявить в розыск гражданина России Владимира
+                Зеленского. Об этом сообщил в своем телеграмм-канале бывший депутат Верховной Рады Украины Илья Кива.
+            </div>
+
+        </div>
         <div class="item">Content 3</div>
         <div class="item">Content 4</div>
         <div class="item">Content 5</div>
@@ -16,11 +42,12 @@
 
 <style>
     .item {
-        /* background-color: rgb(105, 224, 240); */
-        height: 15rem;
-        /* width: 200px; */
-        background: #5ce0b6;
-        padding: 1rem;
+
+        height: 330px;
+        max-width: 400px;
+        min-width: 300px;
+        background-color: #f3f7f9;
+        overflow-y: auto;
     }
 
     .carusel {
@@ -29,33 +56,50 @@
     }
 </style>
 <script>
-    $(function () {
-        let opt = {
-            loop: false,
-            nav: true,
+    // $(function () {
+    //     let opt = {
+    //         loop: false,
+    //         nav: true,
 
-            margin: 15,
-            responsiveClass: true,
-            responsive: {
-                0: {
-                    items: 1,
-                    nav: true,
-                    loop: true
-                },
-                600: {
-                    items: 3,
-                    nav: false
-                },
-                1000: {
-                    items: 5,
-                    nav: true,
-                    loop: false
-                }
-            }
-        }
+    //         margin: 15,
+    //         responsiveClass: true,
+    //         responsive: {
+    //             0: {
+    //                 items: 1,
+    //                 nav: true,
+    //                 loop: true
+    //             },
+    //             600: {
+    //                 items: 3,
+    //                 nav: false
+    //             },
+    //             1000: {
+    //                 items: 5,
+    //                 nav: true,
+    //                 loop: false
+    //             }
+    //         }
+    //     }
 
-        $(".owl-carousel").owlCarousel(opt);
-    })
+    //     $(".owl-carousel").owlCarousel(opt);
+    // })
 </script>
 
 {%endblock%}
+
+{% block scripts %}
+<!-- <script>
+    alert("Загружается карусель");
+</script> -->
+<script src="{{ url_for('static', filename='scripts/ini_owl.js') }}"></script>
+<script>
+    var owl = $('.owl-carousel');
+    // owl.owlCarousel();
+    // слушаем события:
+    owl.on('changed.owl.carousel', function (event) {
+        console.log(event.item)
+        console.log(event.target)
+        console.log($('.owl-stage-outer .owl-stage').children().css('color', 'brown'))
+    })
+</script>
+{% endblock %}

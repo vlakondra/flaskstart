@@ -120,7 +120,7 @@
         {%block content%}{%endblock%}
     </section>
 
-    {% block scripts %}
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
@@ -148,7 +148,10 @@
 
         });
     </script>
-    {% endblock %}
+
+    {% block scripts %} {% endblock %}
+
+
 </body>
 
 
