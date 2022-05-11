@@ -11,16 +11,21 @@ from flask import  session, request
 # from app import routes
 # from app import special
 
+UPLOAD_FOLDER = os.path.join(os.getcwd(),'uploads')
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
+
 def create_app(test_config=None):
     app = Flask(__name__, 
                 instance_relative_config=True, 
-                template_folder='bulma')
+                template_folder='bulma',)
     
     app.config.from_mapping(
         SECRET_KEY='123456789',
         DATABASE=os.path.join(app.instance_path, 'database.db'),
         COUNTRY='Russia',
-        DEBUG_TB_INTERCEPT_REDIRECTS = False
+        DEBUG_TB_INTERCEPT_REDIRECTS = False,
+         UPLOAD_FOLDER=UPLOAD_FOLDER        
     )
     
     print("DB? ",os.path.join(app.instance_path, 'database.db'))

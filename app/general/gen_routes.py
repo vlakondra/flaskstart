@@ -1,6 +1,12 @@
-from flask import (
-    Blueprint, flash, g, redirect, render_template, request, session, url_for, jsonify
-)
+from email import message
+from pyexpat.errors import messages
+from flask import ( Blueprint, flash, g,
+ redirect, render_template, current_app,
+  request, session, url_for, jsonify)
+
+from werkzeug.utils import secure_filename
+import os,sys
+# from flask import current_app
 
 from app import db
 
@@ -9,7 +15,7 @@ print('name - general', __name__)
 
 
 @bp_gen.route('/')
-@bp_gen.route('/index')
+@bp_gen.route('/index' )
 def index():
     return render_template(
         '/general/index.html',
@@ -57,3 +63,29 @@ def owl():
         '/general/owl.html',
         title='Карусель',
     )
+
+
+@bp_gen.route('/file')
+def file():
+    return render_template(
+        '/general/upload.html',
+        title='Выгрузка файла',
+    )    
+
+@bp_gen.route('/savefile',methods=['POST'])
+def savefile():
+    if request.method == 'POST':
+      print(request.files)
+
+      if 'datafile' not in request.files:
+          return redirect(request.origin+url_for('general.file',message="Сохранение файла невозможно"))
+
+      file = request.files['datafile']  
+      filename = secure_filename(file.filename)
+
+      print("filename",file.filename)
+      print('secfilename ',filename)  
+      print('cwd',os.getcwd())
+
+      file.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
+      return redirect(request.origin+url_for('general.file',message="Файл "+ filename+ " сохранен"))
