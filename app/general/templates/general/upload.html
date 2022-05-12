@@ -2,9 +2,9 @@
 
 {% block content %}
 <div class="container small-form">
-    <form action={{url_for('general.savefile')}} enctype="multipart/form-data" method="POST">
+    <form action={{url_for('general.savefile')}} multiple required enctype="multipart/form-data" method="POST">
         <div class="file has-name">
-            <label class="file-label">
+            <label class="file-label ">
                 <input class="file-input" required multiple type="file" name="datafile">
                 <span class="file-cta">
                     <span class="file-icon">
@@ -14,15 +14,38 @@
                         Выберите файл…
                     </span>
                 </span>
-                <span class="file-name">
+                <!-- <span class="file-name">
                     Здесь м.б. описание файла
-                </span>
+                </span> -->
             </label>
+            <div class="dropdown is-hoverable">
+                <div class="dropdown-trigger">
+                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                        <span>Hover me</span>
+                        <span class="icon is-small">
+                            <i class="fas fa-angle-down" aria-hidden="true"></i>
+                        </span>
+                    </button>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                    <div class="dropdown-content">
+                        <div class="dropdown-item">
+                            <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- </label> -->
         </div>
         <div>
             <input id="finp" class="button" type="submit" value="Отправить">
         </div>
-        <div class="c1 c2"></div>
+        <div class="c1 c2">
+            {{mess}}
+        </div>
         {% if request.args.get('message')%}
         <div class="message is-success">
             {{ request.args.get('message') }}
@@ -54,12 +77,23 @@
     let inp = document.querySelector('#finp')
     fileInput.onchange = () => {
         if (fileInput.files.length > 0) {
-            const fileName = document.querySelector('.file .file-name');
-            console.log('file', fileInput.files[0])
-            fileName.textContent = fileInput.files[0].name;
-            var mess = document.querySelector('.c1.c2')
-            console.log(mess)
-            mess.textContent = "??!!!!!!!!!!!"
+            const fileNames = document.querySelector('.dropdown-content')//'.file .file-name');
+
+            console.log(fileInput.files)
+
+            let farr = Array.from(fileInput.files)
+            farr.forEach(fl => {
+                console.log(fl, fl.name)
+                let div = document.createElement("div")
+                div.classList.add("dropdown-item")
+                div.append("свойства файла")
+                fileNames.append(div)
+            });
+
+
+            // console.log('file', fileInput.files[0])
+            // fileName.textContent = fileInput.files[0].name;
+
             // inp.disabled = true
         }
     }

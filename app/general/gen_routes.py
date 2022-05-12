@@ -1,8 +1,10 @@
 from email import message
 from pyexpat.errors import messages
-from flask import ( Blueprint, flash, g,
+from webbrowser import get
+from flask import ( Blueprint, flash, g, after_this_request,
  redirect, render_template, current_app,
-  request, session, url_for, jsonify)
+  request,  url_for, jsonify)
+from flask import session as sess
 
 from werkzeug.utils import secure_filename
 import os,sys
@@ -65,11 +67,26 @@ def owl():
     )
 
 
+
+# @bp_gen.after_app_request
+# def clear_sess(response):
+#     print("???",response)
+#     sess['file_mess']=""
+#     return response
+
+
 @bp_gen.route('/file')
 def file():
-    return render_template(
+    
+  @after_this_request
+  def clear_message(response):
+        sess['file_mess']=''
+        return response
+
+  return render_template(
         '/general/upload.html',
         title='Выгрузка файла',
+        mess=sess.get( 'file_mess',"")
     )    
 
 @bp_gen.route('/savefile',methods=['POST'])
@@ -91,5 +108,9 @@ def savefile():
       print('secfilename ',filename)  
       print('cwd',os.getcwd())
 
+  
+      sess['file_mess']= filename
+
       file.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
-      return redirect(request.origin+url_for('general.file',message="Файл "+ filename+ " сохранен"))
+    #   return redirect(request.origin+url_for('general.file',message="Файл "+ filename+ " сохранен"))
+      return redirect(request.origin+url_for('general.file'))
