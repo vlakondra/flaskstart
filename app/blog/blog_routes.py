@@ -3,8 +3,8 @@ from flask import (
 )
 from werkzeug.exceptions import abort
 
-from flaskstart.app.auth.auth_routes import login_required
-from flaskstart.app.db import get_db
+from app.auth.auth_routes import login_required
+from app.db import get_db
 
 import json
 

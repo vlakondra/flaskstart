@@ -5,8 +5,8 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from flaskstart.app.db import get_db
-from flaskstart.app.forms import RegForm
+from app.db import get_db
+from app.forms import RegForm
 
 bp_auth = Blueprint('auth', __name__, url_prefix='/auth',template_folder="templates")
 

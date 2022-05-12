@@ -37,14 +37,14 @@ def create_app(test_config=None):
     
     # toolbar = DebugToolbarExtension(app)
     
-    from flaskstart.app import db
+    from app import db
         
-    from flaskstart.app.general import gen_routes
-    from flaskstart.app.news import news_routes
-    from flaskstart.app.auth import auth_routes
-    from flaskstart.app.blog import blog_routes
+    from app.general import gen_routes
+    from app.news import news_routes
+    from app.auth import auth_routes
+    from app.blog import blog_routes
   
-    from flaskstart.app.icons import icons
+    from app.icons import icons
         
     app.register_blueprint(gen_routes.bp_gen)
     app.register_blueprint(news_routes.bp_news)

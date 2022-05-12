@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 import os,sys
 # from flask import current_app
 
-from flaskstart.app import db
+from app import db
 
 bp_gen = Blueprint('general', __name__, template_folder='templates')
 print('name - general', __name__)
