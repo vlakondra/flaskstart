@@ -19,7 +19,7 @@ def create_app(test_config=None):
     app = Flask(__name__, 
                 instance_relative_config=True, 
                 template_folder='bulma',)
-    
+    print('NAME',app.name)
     app.config.from_mapping(
         SECRET_KEY='123456789',
         DATABASE=os.path.join(app.instance_path, 'database.db'),
@@ -37,14 +37,14 @@ def create_app(test_config=None):
     
     # toolbar = DebugToolbarExtension(app)
     
-    from app import db
+    from flaskstart.app import db
         
-    from app.general import gen_routes
-    from app.news import news_routes
-    from app.auth import auth_routes
-    from app.blog import blog_routes
+    from flaskstart.app.general import gen_routes
+    from flaskstart.app.news import news_routes
+    from flaskstart.app.auth import auth_routes
+    from flaskstart.app.blog import blog_routes
   
-    from app.icons import icons
+    from flaskstart.app.icons import icons
         
     app.register_blueprint(gen_routes.bp_gen)
     app.register_blueprint(news_routes.bp_news)

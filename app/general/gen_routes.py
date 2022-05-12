@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 import os,sys
 # from flask import current_app
 
-from app import db
+from flaskstart.app import db
 
 bp_gen = Blueprint('general', __name__, template_folder='templates')
 print('name - general', __name__)
@@ -81,7 +81,11 @@ def savefile():
           return redirect(request.origin+url_for('general.file',message="Сохранение файла невозможно"))
 
       file = request.files['datafile']  
-      filename = secure_filename(file.filename)
+      fls =  request.files.getlist("datafile") 
+      filename = secure_filename(file.filename) #mimetype
+      #https://stackoverflow.com/questions/11817182/uploading-multiple-files-with-flask
+
+      print('arr? ',type(file), file,type(fls), fls)
 
       print("filename",file.filename)
       print('secfilename ',filename)  

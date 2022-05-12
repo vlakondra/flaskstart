@@ -5,7 +5,7 @@
     <form action={{url_for('general.savefile')}} enctype="multipart/form-data" method="POST">
         <div class="file has-name">
             <label class="file-label">
-                <input class="file-input" type="file" name="datafile">
+                <input class="file-input" required multiple type="file" name="datafile">
                 <span class="file-cta">
                     <span class="file-icon">
                         <i class="fas fa-upload"></i>
@@ -20,8 +20,9 @@
             </label>
         </div>
         <div>
-            <input class="button" type="submit" value="Отправить">
+            <input id="finp" class="button" type="submit" value="Отправить">
         </div>
+        <div class="c1 c2"></div>
         {% if request.args.get('message')%}
         <div class="message is-success">
             {{ request.args.get('message') }}
@@ -50,10 +51,16 @@
 {%block scripts%}
 <script>
     const fileInput = document.querySelector('.file input[type=file]');
+    let inp = document.querySelector('#finp')
     fileInput.onchange = () => {
         if (fileInput.files.length > 0) {
             const fileName = document.querySelector('.file .file-name');
+            console.log('file', fileInput.files[0])
             fileName.textContent = fileInput.files[0].name;
+            var mess = document.querySelector('.c1.c2')
+            console.log(mess)
+            mess.textContent = "??!!!!!!!!!!!"
+            // inp.disabled = true
         }
     }
 </script>
