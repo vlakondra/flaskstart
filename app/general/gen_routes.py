@@ -78,11 +78,6 @@ def owl():
 @bp_gen.route('/file')
 def file():
     
-  @after_this_request
-  def clear_message(response):
-        sess['file_mess']=''
-        return response
-
   return render_template(
         '/general/upload.html',
         title='Выгрузка файла',
@@ -107,6 +102,10 @@ def savefile():
       print("filename",file.filename)
       print('secfilename ',filename)  
       print('cwd',os.getcwd())
+
+
+      for f in fls:
+          print("from file list",f.mimetype)
 
   
       sess['file_mess']= filename
