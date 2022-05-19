@@ -3,9 +3,28 @@
 {% block content %}
 <div class="container small-form">
     <form action={{url_for('general.savefile')}} multiple required enctype="multipart/form-data" method="POST">
+
+        <div class="field">
+            <label class="label">Message</label>
+            <div class="control">
+                <textarea class="textarea" placeholder="Textarea" name="taria"></textarea>
+            </div>
+        </div>
+        <div class="field">
+            <div class="select is-multiple">
+                <select multiple size="8" name="sel">
+                    <option value="One">One</option>
+                    <option value="Two">Two</option>
+                    <option value="Three">Three</option>
+                </select>
+            </div>
+
+        </div>
+
+
         <div class="file has-name">
             <label class="file-label ">
-                <input class="file-input" required multiple type="file" name="datafile">
+                <input id="dnld" class="file-input" required multiple type="file" name="datafile">
                 <span class="file-cta">
                     <span class="file-icon">
                         <i class="fas fa-upload"></i>

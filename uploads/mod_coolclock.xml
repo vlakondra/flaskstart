@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="2.5" method="upgrade">
+    <name>MOD_COOLCLOCK</name>
+    <version>1.5</version>
+    <description>MOD_COOLCLOCK_XML_DESC</description>
+    <author>Michael Richey</author>
+    <authorEmail>michael@richeyweb.com</authorEmail>
+    <authorUrl>http://www.richeyweb.com</authorUrl>
+    <license>http://www.gnu.org/licenses/gpl-2.0.html</license>
+    <copyright>2007-2009 Michael Richey</copyright>
+    <creationDate>20-Feb-2010</creationDate>
+    <media folder="media" destination="mod_coolclock">
+        <folder>assets</folder>
+    </media>
+    <files>
+        <folder>tmpl</folder>
+        <filename module="mod_coolclock">mod_coolclock.php</filename>
+        <filename>index.html</filename>
+    </files>
+    <languages>
+        <language tag="en-GB">en-GB.mod_coolclock.ini</language>
+        <language tag="en-GB">en-GB.mod_coolclock.sys.ini</language>
+    </languages>
+    <config>
+        <fields name="params">
+            <fieldset name="basic">
+                <field name="moduleclass_sfx" type="text" label="COM_MODULES_FIELD_MODULECLASS_SFX_LABEL" description="COM_MODULES_FIELD_MODULECLASS_SFX_DESC" />
+                <field type="list" name="skin" label="MOD_COOLCLOCK_SKIN" default="swissRail" description="MOD_COOLCLOCK_SKIN_DESC">
+                    <option value="custom">custom</option>
+                    <option value="swissRail">swissRail</option>
+                    <option value="chunkySwiss">chunkySwiss</option>
+                    <option value="chunkySwissOnBlack">chunkySwissOnBlack</option>
+                    <option value="fancy">fancy</option>
+                    <option value="machine">machine</option>
+                    <option value="classic">classic</option>
+                    <option value="modern">modern</option>
+                    <option value="simple">simple</option>
+                    <option value="securephp">securephp</option>
+                    <option value="Tes2">Tes2</option>
+                    <option value="Lev">Lev</option>
+                    <option value="Sand">Sand</option>
+                    <option value="Sun">Sun</option>
+                    <option value="Tor">Tor</option>
+                    <option value="Cold">Cold</option>
+                    <option value="Babosa">Babosa</option>
+                    <option value="Tumb">Tumb</option>
+                    <option value="Stone">Stone</option>
+                    <option value="Disc">Disc</option>
+                </field>
+                <field type="text" name="radius" label="MOD_COOLCLOCK_RADIUS" default="40" description="MOD_COOLCLOCK_RADIUS_DESC" class="" size="3" />
+                <field type="radio" name="showseconds" label="MOD_COOLCLOCK_SHOW_SECONDS" default="1" description="MOD_COOLCLOCK_SHOW_SECONDS_DESC">
+                    <option value="1">JYes</option>
+                    <option value="0">JNo</option>
+                </field>
+                <field type="text" name="daytimestart" label="MOD_COOLCLOCK_SHOW_DAYSTART" description="MOD_COOLCLOCK_SHOW_DAYSTART_DESC" default="6" />
+                <field type="text" name="daytimeend" label="MOD_COOLCLOCK_SHOW_DAYEND" description="MOD_COOLCLOCK_SHOW_DAYEND_DESC" default="18" />
+            </fieldset>
+            <fieldset name="advanced">
+                <field type="text" name="offset" label="MOD_COOLCLOCK_GMTOFFSET" default="" description="MOD_COOLCLOCK_GMTOFFSET_DESC" class="" size="3" />
+                <field type="spacer" label="MOD_COOKCLOCK_CUSTOMSKINSPACER" />
+                <field type="spacer" label="MOD_COOLCLOCK_CLOCK_OUTER_BORDER" />
+                <field type="text" name="outerBorder-lineWidth" label="MOD_COOKCLOCK_LINEWIDTH" default="1" description="MOD_COOKCLOCK_LINEWIDTH_DESC" class="" size="2" />
+                <field type="text" name="outerBorder-radius" label="MOD_COOKCLOCK_RADIUS" default="95" description="MOD_COOKCLOCK_RADIUS_DESC" class="" size="2" />
+                <field type="color" name="outerBorder-color" label="MOD_COOKCLOCK_COLOR" default="#000000" description="MOD_COOKCLOCK_COLOR_DESC" size="7" />
+                <field type="text" name="outerBorder-alpha" label="MOD_COOKCLOCK_ALPHA" default="1" description="MOD_COOKCLOCK_ALPHA_DESC" class="" size="2" />
+                <field type="spacer" label="MOD_COOLCLOCK_MINUTE_MARKS" />
+                <field type="text" name="smallIndicator-lineWidth" label="MOD_COOKCLOCK_LINEWIDTH" default="2" description="MOD_COOKCLOCK_LINEWIDTH_DESC" class="" size="2" />
+                <field type="text" name="smallIndicator-startAt" label="MOD_COOKCLOCK_STARTAT" default="89" description="MOD_COOKCLOCK_STARTAT_DESC" class="" size="3" />
+                <field type="text" name="smallIndicator-endAt" label="MOD_COOKCLOCK_ENDAT" default="93" description="MOD_COOKCLOCK_ENDAT_DESC" class="" size="3" />
+                <field type="color" name="smallIndicator-color" label="MOD_COOKCLOCK_COLOR" default="#000000" description="MOD_COOKCLOCK_COLOR_DESC" size="7" />
+                <field type="text" name="smallIndicator-alpha" label="MOD_COOKCLOCK_ALPHA" default="1" description="MOD_COOKCLOCK_ALPHA_DESC" class="" size="2" />
+                <field type="spacer" label="MOD_COOLCLOCK_HOUR_MARKS" />
+                <field type="text" name="largeIndicator-lineWidth" label="MOD_COOKCLOCK_LINEWIDTH" default="4" description="MOD_COOKCLOCK_LINEWIDTH_DESC" class="" size="2" />
+                <field type="text" name="largeIndicator-startAt" label="MOD_COOKCLOCK_STARTAT" default="80" description="MOD_COOKCLOCK_STARTAT_DESC" class="" size="3" />
+                <field type="text" name="largeIndicator-endAt" label="MOD_COOKCLOCK_ENDAT" default="93" description="MOD_COOKCLOCK_ENDAT_DESC" class="" size="2" />
+                <field type="color" name="largeIndicator-color" label="MOD_COOKCLOCK_COLOR" default="#000000" description="MOD_COOKCLOCK_COLOR_DESC" size="7" />
+                <field type="text" name="largeIndicator-alpha" label="MOD_COOKCLOCK_ALPHA" default="1" description="MOD_COOKCLOCK_ALPHA_DESC" class="" size="2" />
+                <field type="spacer" label="MOD_COOLCLOCK_HOUR_HAND" />
+                <field type="text" name="hourHand-lineWidth" label="MOD_COOKCLOCK_LINEWIDTH" default="8" description="MOD_COOKCLOCK_LINEWIDTH_DESC" class="" size="2" />
+                <field type="text" name="hourHand-startAt" label="MOD_COOKCLOCK_STARTAT" default="-15" description="MOD_COOKCLOCK_STARTAT_DESC" class="" size="3" />
+                <field type="text" name="hourHand-endAt" label="MOD_COOKCLOCK_ENDAT" default="50" description="MOD_COOKCLOCK_ENDAT_DESC" class="" size="3" />
+                <field type="color" name="hourHand-color" label="MOD_COOKCLOCK_COLOR" default="#000000" description="MOD_COOKCLOCK_COLOR_DESC" size="7" />
+                <field type="text" name="hourHand-alpha" label="MOD_COOKCLOCK_ALPHA" default="1" description="MOD_COOKCLOCK_ALPHA_DESC" class="" size="2" />
+                <field type="spacer" label="MOD_COOLCLOCK_MINUTE_HAND" />
+                <field type="text" name="minuteHand-lineWidth" label="MOD_COOKCLOCK_LINEWIDTH" default="7" description="MOD_COOKCLOCK_LINEWIDTH_DESC" class="" size="2" />
+                <field type="text" name="minuteHand-startAt" label="MOD_COOKCLOCK_STARTAT" default="-15" description="MOD_COOKCLOCK_STARTAT_DESC" class="" size="3" />
+                <field type="text" name="minuteHand-endAt" label="MOD_COOKCLOCK_ENDAT" default="75" description="MOD_COOKCLOCK_ENDAT_DESC" class="" size="3" />
+                <field type="color" name="minuteHand-color" label="MOD_COOKCLOCK_COLOR" default="#000000" description="MOD_COOKCLOCK_COLOR_DESC" size="7" />
+                <field type="text" name="minuteHand-alpha" label="MOD_COOKCLOCK_ALPHA" default="1" description="MOD_COOKCLOCK_ALPHA_DESC" class="" size="2" />
+                <field type="spacer" label="MOD_COOLCLOCK_SECOND_HAND" />
+                <field type="text" name="secondHand-lineWidth" label="MOD_COOKCLOCK_LINEWIDTH" default="1" description="MOD_COOKCLOCK_LINEWIDTH_DESC" class="" size="2" />
+                <field type="text" name="secondHand-startAt" label="MOD_COOKCLOCK_STARTAT" default="-20" description="MOD_COOKCLOCK_STARTAT_DESC" class="" size="3" />
+                <field type="text" name="secondHand-endAt" label="MOD_COOKCLOCK_ENDAT" default="85" description="MOD_COOKCLOCK_ENDAT_DESC" class="" size="3" />
+                <field type="color" name="secondHand-color" label="MOD_COOKCLOCK_COLOR" default="#FF0000" description="MOD_COOKCLOCK_COLOR_DESC" size="7" />
+                <field type="text" name="secondHand-alpha" label="MOD_COOKCLOCK_ALPHA" default="1" description="MOD_COOKCLOCK_ALPHA_DESC" class="" size="2" />
+                <field type="spacer" label="MOD_COOLCLOCK_SECOND_HAND_DECORATION" />
+                <field type="text" name="secondDecoration-lineWidth" label="MOD_COOKCLOCK_LINEWIDTH" default="1" description="MOD_COOKCLOCK_LINEWIDTH_DESC" class="" size="2" />
+                <field type="text" name="secondDecoration-startAt" label="MOD_COOKCLOCK_STARTAT" default="70" description="MOD_COOKCLOCK_STARTAT_DESC" class="" size="3" />
+                <field type="text" name="secondDecoration-radius" label="MOD_COOKCLOCK_RADIUS" default="4" description="MOD_COOKCLOCK_RADIUS_DESC" class="" size="2" />
+                <field type="color" name="secondDecoration-fillColor" label="MOD_COOKCLOCK_FILLCOLOR" default="#FF0000" description="MOD_COOKCLOCK_FILLCOLOR_DESC" size="7" />
+                <field type="color" name="secondDecoration-color" label="MOD_COOKCLOCK_COLOR" default="#FF0000" description="MOD_COOKCLOCK_COLOR_DESC" size="7" />
+                <field type="text" name="secondDecoration-alpha" label="MOD_COOKCLOCK_ALPHA" default="1" description="MOD_COOKCLOCK_ALPHA_DESC" class="" size="2" />
+            </fieldset>
+        </fields>
+    </config>
+</extension>

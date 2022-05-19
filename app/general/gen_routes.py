@@ -3,7 +3,7 @@ from pyexpat.errors import messages
 from webbrowser import get
 from flask import ( Blueprint, flash, g, after_this_request,
  redirect, render_template, current_app,
-  request,  url_for, jsonify)
+  request,  url_for, jsonify,send_from_directory)
 from flask import session as sess
 
 from werkzeug.utils import secure_filename
@@ -92,6 +92,13 @@ def savefile():
       if 'datafile' not in request.files:
           return redirect(request.origin+url_for('general.file',message="Сохранение файла невозможно"))
 
+      txt = request.form['taria'] 
+      print('TEXT-ARIA ', txt)
+
+
+      sl = request.form.getlist('sel')
+      print('SEL: ', sl )
+       
       file = request.files['datafile']  
       fls =  request.files.getlist("datafile") 
       filename = secure_filename(file.filename) #mimetype
@@ -112,4 +119,23 @@ def savefile():
 
       file.save(os.path.join(current_app.config['UPLOAD_FOLDER'],filename))
     #   return redirect(request.origin+url_for('general.file',message="Файл "+ filename+ " сохранен"))
+     
+      files=os.listdir(current_app.config['UPLOAD_FOLDER'])
+      print(files)
+     
       return redirect(request.origin+url_for('general.file'))
+
+
+
+#############
+
+@bp_gen.route('/loadfile')
+def load():
+  return render_template(
+        '/general/down.html',
+        title='Загрузка файла',
+    ) 
+
+@bp_gen.route('/uploads/<path:filename>', methods=['GET', 'POST'])
+def download(filename):
+    return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename,as_attachment=True)

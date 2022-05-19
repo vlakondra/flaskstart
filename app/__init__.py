@@ -19,7 +19,10 @@ def create_app(test_config=None):
     app = Flask(__name__, 
                 instance_relative_config=True, 
                 template_folder='bulma',)
+                
     print('NAME',app.name)
+    app.debug=True;
+
     app.config.from_mapping(
         SECRET_KEY='123456789',
         DATABASE=os.path.join(app.instance_path, 'database.db'),
