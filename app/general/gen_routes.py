@@ -5,6 +5,7 @@ from flask import ( Blueprint, flash, g, after_this_request,
  redirect, render_template, current_app,
   request,  url_for, jsonify,send_from_directory)
 from flask import session as sess
+import requests
 
 from werkzeug.utils import secure_filename
 import os,sys
@@ -139,3 +140,16 @@ def load():
 @bp_gen.route('/uploads/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
     return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename,as_attachment=True)
+
+
+@bp_gen.route('/req')
+def req():
+  url = 'https://old.ursei.su/Services/GetGsSched'
+  # https://old.ursei.su/Services/GetGsSched?grpid=26033&yearid=26&monthnum=5
+
+  params = dict( grpid=26033, yearid=26,monthnum=5)
+
+  resp = requests.get(url=url, params=params)
+  data = resp.json()
+  print(data)
+  return "<h1>xxx<h1>"
