@@ -145,11 +145,27 @@ def download(filename):
 @bp_gen.route('/req')
 def req():
   url = 'https://old.ursei.su/Services/GetGsSched'
+  
   # https://old.ursei.su/Services/GetGsSched?grpid=26033&yearid=26&monthnum=5
+  # https://betacode.net/12451/html-list
 
   params = dict( grpid=26033, yearid=26,monthnum=5)
 
   resp = requests.get(url=url, params=params)
   data = resp.json()
-  print(data)
-  return "<h1>xxx<h1>"
+#   print(data)
+
+  return render_template(
+        '/general/req.html',
+        title='Расписание')
+
+
+@bp_gen.route('/getgroups')
+def getgroups():
+    if request.method == 'GET':
+        url='https://old.ursei.su/Services/GetGSSchedIniData'
+        resp = requests.get(url=url)
+        data = resp.json()
+        print(data)
+        return jsonify(data)
+

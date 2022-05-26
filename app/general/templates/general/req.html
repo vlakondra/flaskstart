@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<p>
+    <a href="https://iamkate.com/code/tree-views/">Tree-CSS</a>
+</p>
+
+<ul class="tree">
+    <li>
+        <details open>
+            <summary>Giant planets</summary>
+            <ul>
+                <li>
+                    <details>
+                        <summary>Gas giants</summary>
+                        <ul>
+                            <li>Jupiter</li>
+                            <li>Saturn</li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <details>
+                        <summary>Ice giants</summary>
+                        <ul>
+                            <li>Uranus</li>
+                            <li>Neptune</li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </details>
+    </li>
+</ul>
+
+<div id="res"></div>
+
+<style>
+    .thing {
+        font-size: 1.5em;
+    }
+</style>
+
+{%endblock%}
+
+{%block scripts%}
+<script>
+    $(function () {
+        function run(val) {
+            alert(val + "!!!")
+        }
+        $.getJSON('{{url_for("general.getgroups")}}', function (data) {
+            let items = []
+            let ul = $('<ul/>', {id: '007'})
+            $.each(data.YearList, function (key, val) {
+                let li = $('<li/>', {html: key + '-' + val.Year_ID}).bind('click', function () {run(val.EduYear)})
+                //items.push("<li class='thing'>" + key + '-' + val.EduYear + '-' + val.Year_ID + "</li>");
+                li.appendTo(ul)
+            })
+            ul.appendTo($('#res'))
+
+            /////////////
+            // $('#res').on("click", '.thing', function (e) {
+            //     console.log(e)
+            //     console.log($(this))
+            // });
+
+
+
+        })
+    })
+</script>
+
+
+<script src="{{ url_for('static', filename='scripts/bundle.js') }}"></script>
+
+{%endblock%}
