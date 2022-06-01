@@ -5,6 +5,16 @@
     <a href="https://iamkate.com/code/tree-views/">Tree-CSS</a>
 </p>
 
+<ul>
+    <li>first</li>
+    <details open>
+        <ul>
+            <li>1</li>
+            <li>2</li>
+        </ul>
+    </details>
+</ul>
+
 <ul class="tree">
     <li>
         <details open>
@@ -39,6 +49,19 @@
     .thing {
         font-size: 1.5em;
     }
+
+    ul li {
+        margin-left: 20px
+    }
+
+    ul {
+        list-style: disc;
+    }
+
+    ul.groups li {
+        color: blue;
+        font-size: 0.9em;
+    }
 </style>
 
 {%endblock%}
@@ -50,28 +73,52 @@
             alert(val + "!!!")
         }
         $.getJSON('{{url_for("general.getgroups")}}', function (data) {
-            let items = []
-            let ul = $('<ul/>', {id: '007'})
-            $.each(data.YearList, function (key, val) {
-                let li = $('<li/>', {html: key + '-' + val.Year_ID}).bind('click', function () {run(val.EduYear)})
-                //items.push("<li class='thing'>" + key + '-' + val.EduYear + '-' + val.Year_ID + "</li>");
-                li.appendTo(ul)
+            let ul = $('<ul/>', {id: '007', class: 'thing'})
+            // $.each(data.YearList, function (key, val) {
+            //     let li = $('<li/>', {html: key + '-' + val.Year_ID}).bind('click', function () {run(val.EduYear)})
+            //     li.appendTo(ul)
+            // })
+
+            let dataYear = data.GSTree.filter(y => y.Year_ID == 26)[0]
+            console.log('data!!', dataYear)
+
+            let root_UL = $("<ul/>", {id: 'root_ul', class: 'groups'})
+
+            $.each(dataYear.FormEdu, function (key, val) {
+                let formEduName_LI = $("<li/>", {id: val.FormEdu_ID, html: val.FormEduName})
+
+                let det = $('<details/>', {open: false})
+
+                let curs_UL = $('<ul/>')
+                det.append(curs_UL)
+
+                root_UL.append(formEduName_LI)
+                formEduName_LI.append(det)//curs_UL)
+
+                $.each(val.arr, function (k, v) {
+                    let curs_LI = $('<li/>', {html: "Курс " + v.Curs})
+                    curs_UL.append(curs_LI)
+
+                    let grp_UL = $('<ul/>',)
+                    curs_LI.append(grp_UL)
+
+                    $.each(v.arr, function (i, d) {
+                        let grp_LI = $('<li/>', {html: d.GSName})
+                        grp_LI.appendTo(grp_UL)
+                    })
+                })
+
+                formEduName_LI.appendTo(root_UL)
             })
-            ul.appendTo($('#res'))
-
-            /////////////
-            // $('#res').on("click", '.thing', function (e) {
-            //     console.log(e)
-            //     console.log($(this))
-            // });
 
 
+            root_UL.appendTo($('#res'))
 
         })
     })
 </script>
 
 
-<script src="{{ url_for('static', filename='scripts/bundle.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='scripts/bundle.js') }}"></script> -->
 
 {%endblock%}

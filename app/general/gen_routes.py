@@ -166,6 +166,6 @@ def getgroups():
         url='https://old.ursei.su/Services/GetGSSchedIniData'
         resp = requests.get(url=url)
         data = resp.json()
-        print(data)
+        # print(data)
         return jsonify(data)
 
