@@ -3,12 +3,16 @@ from pyexpat.errors import messages
 from webbrowser import get
 from flask import ( Blueprint, flash, g, after_this_request,
  redirect, render_template, current_app,
-  request,  url_for, jsonify,send_from_directory)
+  request,  url_for, jsonify,send_from_directory,send_file)
 from flask import session as sess
 import requests
 
 from werkzeug.utils import secure_filename
 import os,sys
+
+import shutil
+import zipfile
+
 # from flask import current_app
 
 from app import db
@@ -140,6 +144,28 @@ def load():
 @bp_gen.route('/uploads/<path:filename>', methods=['GET', 'POST'])
 def download(filename):
     return send_from_directory(current_app.config['UPLOAD_FOLDER'], filename,as_attachment=True)
+
+@bp_gen.route('/downfiles')
+def downfiles():
+
+    shutil.make_archive(current_app.config['TMP_FOLDER'] +'/'+'myfiles','zip',current_app.config['UPLOAD_FOLDER'])
+
+    # zf = zipfile.ZipFile(current_app.config['TMP_FOLDER'] +'/'+'myfiles.zip','w', compression = zipfile.ZIP_STORED) # Compression type 
+
+    # for  files in os.walk(current_app.config['UPLOAD_FOLDER']):
+    #     for file in files:
+    #         zf.write(current_app.config['UPLOAD_FOLDER'] +'/'+file)
+    # zf.close()
+
+    return send_file(current_app.config['TMP_FOLDER'] +'/'+'myfiles.zip',
+            mimetype = 'zip',
+            attachment_filename=  'myfiles.zip',
+            as_attachment = True)
+
+
+
+
+
 
 
 @bp_gen.route('/req')

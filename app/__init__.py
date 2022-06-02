@@ -12,6 +12,7 @@ from flask import  session, request
 # from app import special
 
 UPLOAD_FOLDER = os.path.join(os.getcwd(),'uploads')
+TMP_FOLDER = os.path.join(os.getcwd(),'tmp')
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 
 
@@ -28,7 +29,9 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'database.db'),
         COUNTRY='Russia',
         DEBUG_TB_INTERCEPT_REDIRECTS = False,
-         UPLOAD_FOLDER=UPLOAD_FOLDER        
+         UPLOAD_FOLDER=UPLOAD_FOLDER   , 
+         TMP_FOLDER=TMP_FOLDER    
+
     )
     
     print("DB? ",os.path.join(app.instance_path, 'database.db'))
